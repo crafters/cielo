@@ -10,8 +10,11 @@ rescue Bundler::BundlerError => e
   exit e.status_code
 end
 require 'rake'
+require "rspec/core/rake_task"
+RSpec::Core::RakeTask.new
 
 require 'jeweler'
+require './lib/cielo/version.rb'
 Jeweler::Tasks.new do |gem|
   # gem is a Gem::Specification... see http://docs.rubygems.org/read/chapter/20 for more options
   gem.name = "cielo"
@@ -21,6 +24,7 @@ Jeweler::Tasks.new do |gem|
   gem.description = %Q{TODO: longer description of your gem}
   gem.email = "felix.rafael@gmail.com"
   gem.authors = ["Rafael Felix"]
+  gem.version = Cielo::Version::STRING
   # dependencies defined in Gemfile
 end
 Jeweler::RubygemsDotOrgTasks.new

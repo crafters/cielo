@@ -1,6 +1,45 @@
 = cielo
 
-Description goes here.
+Integração com a Cielo via WebServices
+
+== Funcionalidades Implementadas
+
+* Criaçao de transação
+* Consulta de stauts de transação
+* Caputra de transação
+
+== USO
+
+  gem install cielo
+
+=== Ambiente de teste (Homologação)
+
+  transaction = Cielo::Trasaction.new
+  transaction.create!(numero: "XXX", valor: "123123", moeda: "BRL", ...) #inicia uma nova transação
+  transaction.verify!("TID OF THE TRANSACTION") #verifica o status de uma transação
+  transaction.catch!("TID OF THE TRANSACTION") #captura a transação
+
+=== Produção
+
+É necessáio escrever sua classe production, os atributos de retorno e os numeros devem estar preenchidos
+  
+  module Cielo
+    class Production
+      @@numero_afiliacao = "Vem com a afiliação"
+      @@chave_acesso="Deve ser pedido no suporte da cielo"
+      cattr_reader :numero_afiliacao, :chave_acesso
+      BASE_URL = "ecommerce.cbmp.com.br" # URL de produção da cielo
+      WS_PATH = "/servicos/ecommwsec.do" # Destino
+      DOMAIN_URL = "http://localhost:3000" # Seu site, é pra onde a cielo redirecionara após ter feito a transação
+    end
+  end
+  
+O restante do uso é igual homologação :P
+
+== Avisos
+
+* O retorno da cielo é convertido em um hash, então, atributos no xml como url-retorno ficam :"url-retorno", cuidado com esses detalhes.
+* Foi desenvolvido e testado em ruby 1.9.2
 
 == Contributing to cielo
  
@@ -12,8 +51,13 @@ Description goes here.
 * Make sure to add tests for it. This is important so I don't break it in a future version unintentionally.
 * Please try not to mess with the Rakefile, version, or history. If you want to have your own version, or is otherwise necessary, that is fine, but please isolate to its own commit so I can cherry-pick around it.
 
+== Colaboradores
+
+* Felipe Rodrigues (@felipero)
+* Rafael Felix (@fellix)
+
 == Copyright
 
-Copyright (c) 2011 Rafael Felix. See LICENSE.txt for
+Copyright (c) 2011 Crafters Software Studio. See LICENSE.txt for
 further details.
 

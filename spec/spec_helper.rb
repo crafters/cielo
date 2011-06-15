@@ -1,0 +1,2 @@
+require 'cielo'
+require 'fakeweb'
