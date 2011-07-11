@@ -9,7 +9,7 @@ Gem::Specification.new do |s|
 
   s.required_rubygems_version = Gem::Requirement.new("> 1.3.1") if s.respond_to? :required_rubygems_version=
   s.authors = ["Rafael Felix", "Felipe Rodrigues"]
-  s.date = %q{2011-06-15}
+  s.date = %q{2011-07-11}
   s.description = %q{Integração com a cielo}
   s.email = %q{felix.rafael@gmail.com}
   s.extra_rdoc_files = [
@@ -23,10 +23,13 @@ Gem::Specification.new do |s|
     "LICENSE.txt",
     "README.rdoc",
     "Rakefile",
+    "cielo.gemspec",
     "lib/cielo.rb",
     "lib/cielo/connection.rb",
     "lib/cielo/transaction.rb",
     "lib/cielo/version.rb",
+    "lib/generators/cielo/install_generator.rb",
+    "lib/generators/templates/cielo.rb",
     "spec/cielo/connection_spec.rb",
     "spec/cielo/transaction_spec.rb",
     "spec/spec_helper.rb"
