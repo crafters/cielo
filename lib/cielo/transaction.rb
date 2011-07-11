@@ -53,6 +53,7 @@ module Cielo
       parameters.merge!(parcelas: "1") unless parameters[:parcelas]
       parameters.merge!(autorizar: "2") unless parameters[:autorizar]
       parameters.merge!(capturar: "true") unless parameters[:capturar]
+      parameters.merge!(:"url-retorno" => Cielo.return_path) unless parameters[:"url-retorno"]
       parameters
     end
     
@@ -62,8 +63,8 @@ module Cielo
       xml.send(group_name, id: "#{Time.now.to_i}", versao: "1.1.0") do
         block.call(xml) if target == :before
         xml.send("dados-ec") do
-          xml.numero @connection.environment.numero_afiliacao
-          xml.chave @connection.environment.chave_acesso
+          xml.numero Cielo.numero_afiliacao
+          xml.chave Cielo.chave_acesso
         end
         block.call(xml) if target == :after
       end

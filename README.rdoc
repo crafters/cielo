@@ -19,22 +19,22 @@ Integração com a Cielo via WebServices
   transaction.verify!("TID OF THE TRANSACTION") #verifica o status de uma transação
   transaction.catch!("TID OF THE TRANSACTION") #captura a transação
 
-=== Produção
+=== Rails
 
-É necessáio escrever sua classe production, os atributos de retorno e os numeros devem estar preenchidos
+  rails g cielo:install
   
-  module Cielo
-    class Production
-      @@numero_afiliacao = "Vem com a afiliação"
-      @@chave_acesso="Deve ser pedido no suporte da cielo"
-      cattr_reader :numero_afiliacao, :chave_acesso
-      BASE_URL = "ecommerce.cbmp.com.br" # URL de produção da cielo
-      WS_PATH = "/servicos/ecommwsec.do" # Destino
-      DOMAIN_URL = "http://localhost:3000" # Seu site, é pra onde a cielo redirecionara após ter feito a transação
-    end
+Esse comando vai gerar um arquivo config/initializers/cielo.rb que já vem configurado para o ambiente de testes, para produção garanta que os dados estão corretos.
+
+=== Outras plataformas
+
+Se torna necessário somente configurar o modulo Cielo
+
+  Cielo.setup do |config|
+    config.environment = :test #:production
+    config.numero_afiliacao = "XXX" # fornecido pela cielo
+    config.chave_acesso = "XXX" # fornecido pela cielo
+    config.return_path = "http://path/to" # URL para onde a cielo redirecionara seu usuário após inserir os dados na cielo.
   end
-  
-O restante do uso é igual homologação :P
 
 == Avisos
 
@@ -53,8 +53,8 @@ O restante do uso é igual homologação :P
 
 == Colaboradores
 
-* Felipe Rodrigues (@felipero)
-* Rafael Felix (@fellix)
+* Felipe Rodrigues [ http://github/felipero http://twitter.com/felipero ]
+* Rafael Felix [ http://github/fellix http://twitter.com/rs_felix ]
 
 == Copyright
 

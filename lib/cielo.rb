@@ -9,27 +9,24 @@ require "builder"
 
 module Cielo
 
-  # Write your own production class
-  #class Production
-  #  @@numero_afiliacao = "suporteweb@cielo.com.br"
-  #  @@chave_acesso="suporteweb@cielo.com.br"
-  #  cattr_reader :numero_afiliacao, :chave_acesso
-  #  BASE_URL = "ecommerce.cbmp.com.br"
-  #  WS_PATH = "/servicos/ecommwsec.do"
-  #  DOMAIN_URL = "Your Web Site here"
-  #end
+  class Production
+    BASE_URL = "ecommerce.cbmp.com.br"
+    WS_PATH = "/servicos/ecommwsec.do"
+  end
 
   class Test
-    @@numero_afiliacao = "1001734898"
-    @@chave_acesso="e84827130b9837473681c2787007da5914d6359947015a5cdb2b8843db0fa832"
-    cattr_reader :numero_afiliacao, :chave_acesso
     BASE_URL = "qasecommerce.cielo.com.br"
     WS_PATH = "/servicos/ecommwsec.do"
-    DOMAIN_URL = "http://localhost:3000"
   end
   
   @@environment = :test
   mattr_accessor :environment
+  @@numero_afiliacao = "1001734898"
+  mattr_accessor :numero_afiliacao
+  @@chave_acesso="e84827130b9837473681c2787007da5914d6359947015a5cdb2b8843db0fa832"
+  mattr_accessor :chave_acesso
+  @@return_path = "http://localhost:3000"
+  mattr_accessor :return_path
 
   def self.setup
     yield self
