@@ -4,7 +4,7 @@ Integração com a Cielo via WebServices
 
 == Funcionalidades Implementadas
 
-* Criaçao de transação
+* Criação de transação
 * Consulta de stauts de transação
 * Caputra de transação
 
@@ -14,7 +14,7 @@ Integração com a Cielo via WebServices
 
 === Ambiente de teste (Homologação)
 
-  transaction = Cielo::Trasaction.new
+  transaction = Cielo::Transaction.new
   transaction.create!(numero: "XXX", valor: "123123", moeda: "BRL", ...) #inicia uma nova transação
   transaction.verify!("TID OF THE TRANSACTION") #verifica o status de uma transação
   transaction.catch!("TID OF THE TRANSACTION") #captura a transação
@@ -22,12 +22,12 @@ Integração com a Cielo via WebServices
 === Rails
 
   rails g cielo:install
-  
+
 Esse comando vai gerar um arquivo config/initializers/cielo.rb que já vem configurado para o ambiente de testes, para produção garanta que os dados estão corretos.
 
 === Outras plataformas
 
-Se torna necessário somente configurar o modulo Cielo
+Se torna necessário somente configurar o módulo Cielo
 
   Cielo.setup do |config|
     config.environment = :test #:production
@@ -42,7 +42,7 @@ Se torna necessário somente configurar o modulo Cielo
 * Foi desenvolvido e testado em ruby 1.9.2
 
 == Contributing to cielo
- 
+
 * Check out the latest master to make sure the feature hasn't been implemented or the bug hasn't been fixed yet
 * Check out the issue tracker to make sure someone already hasn't requested it and/or contributed it
 * Fork the project
@@ -60,4 +60,3 @@ Se torna necessário somente configurar o modulo Cielo
 
 Copyright (c) 2011 Crafters Software Studio. See LICENSE.txt for
 further details.
-
