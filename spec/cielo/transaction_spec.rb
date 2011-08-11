@@ -78,23 +78,15 @@ describe Cielo::Transaction do
   
   describe "Using a production environment" do
     before do
-      module Cielo
-        class Production
-          @@numero_afiliacao = "1001734891"
-          @@chave_acesso="e84827130b9837473681c2787007da5914d6359947015a5cdb2b8843db0fa832"
-          cattr_reader :numero_afiliacao, :chave_acesso
-          BASE_URL = "ecommerce.cbmp.com.br"
-          WS_PATH = "/servicos/ecommwsec.do"
-          DOMAIN_URL = "http://localhost:3000"
-        end
+      Cielo.setup do |config|
+        config.environment = :production
+        config.numero_afiliacao = "1001734891"
+        config.chave_acesso="e84827130b9837473681c2787007da5914d6359947015a5cdb2b8843db0fa832"
       end
-      
-      Cielo.environment = :production
     end
     
     it "must use the production environment" do
-      con = Cielo::Connection.new
-      con.environment.numero_afiliacao.should be_eql "1001734891"
+      Cielo.numero_afiliacao.should be_eql "1001734891"
     end
     
   end

@@ -9,7 +9,7 @@ describe Cielo::Connection do
   end
   describe "making a request" do
     it "should make a request" do
-      response = @connection.request! data: "Anything"
+      response = @connection.request! :data => "Anything"
 
       response.body.should_not be_nil
       response.should be_kind_of Net::HTTPSuccess
