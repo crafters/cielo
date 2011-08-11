@@ -55,6 +55,7 @@ Se torna necessário somente configurar o módulo Cielo
 
 * Felipe Rodrigues [ http://github/felipero http://twitter.com/felipero ]
 * Rafael Felix [ http://github/fellix http://twitter.com/rs_felix ]
+* Gabriel Paladino and Scupen [https://github.com/gabpaladino , https://github.com/scupen] (Ruby 1.8.7 support)
 
 == Copyright
 
