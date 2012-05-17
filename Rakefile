@@ -22,8 +22,8 @@ Jeweler::Tasks.new do |gem|
   gem.license = "MIT"
   gem.summary = %Q{Integração com a cielo}
   gem.description = %Q{Integração com a cielo}
-  gem.email = "felix.rafael@gmail.com"
-  gem.authors = ["Rafael Felix", "Felipe Rodrigues"]
+  gem.email = "crafters@crafters.com.br"
+  gem.authors = ["Crafters Software Studio", "Rafael Felix", "Felipe Rodrigues"]
   gem.version = Cielo::Version::STRING
   # dependencies defined in Gemfile
 end
@@ -36,17 +36,9 @@ Rake::TestTask.new(:test) do |test|
   test.verbose = true
 end
 
-require 'rcov/rcovtask'
-Rcov::RcovTask.new do |test|
-  test.libs << 'test'
-  test.pattern = 'test/**/test_*.rb'
-  test.verbose = true
-  test.rcov_opts << '--exclude "gems/*"'
-end
-
 task :default => :test
 
-require 'rake/rdoctask'
+require 'rdoc/task'
 Rake::RDocTask.new do |rdoc|
   version = File.exist?('VERSION') ? File.read('VERSION') : ""
 

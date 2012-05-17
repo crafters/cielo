@@ -3,6 +3,6 @@ module Cielo
     MAJOR = 0
     MINOR = 1
     PATCH = 1
-    STRING = "#{MAJOR}.#{MINOR}.#{PATCH}.beta2"
+    STRING = "#{MAJOR}.#{MINOR}.#{PATCH}"
   end
 end
