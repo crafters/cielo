@@ -3,6 +3,7 @@ require 'active_support/core_ext/class/attribute_accessors'
 require 'active_support/core_ext/module/attribute_accessors'
 require 'active_support/core_ext/hash'
 require "net/http"
+require "net/https"
 require "rexml/document"
 require "builder"
 [:connection, :transaction].each { |lib| require "cielo/#{lib}" }
