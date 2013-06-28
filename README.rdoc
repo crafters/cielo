@@ -1,5 +1,7 @@
 = cielo
 
+{<img src="https://secure.travis-ci.org/carlosipe/cielo.png" />}[http://travis-ci.org/carlosipe/cielo]
+
 Integração com a Cielo via WebServices
 
 == Funcionalidades Implementadas
