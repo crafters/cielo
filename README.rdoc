@@ -1,6 +1,6 @@
 = cielo
 
-{<img src="https://secure.travis-ci.org/carlosipe/cielo.png" />}[http://travis-ci.org/carlosipe/cielo]
+{<img src="https://secure.travis-ci.org/crafters/cielo.png" />}[http://travis-ci.org/crafters/cielo]
 
 Integração com a Cielo via WebServices
 
