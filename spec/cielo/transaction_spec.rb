@@ -19,12 +19,12 @@ describe Cielo::Transaction do
 
     [:cartao_portador, :cartao_numero, :cartao_validade, :cartao_seguranca, :numero, :valor, :bandeira, :"url-retorno"].each do |parameter|
       it "raises an error when #{parameter} isn't informed" do
-        lambda { @transaction.store_page_create! @params.except!(parameter) }.should raise_error(Cielo::MissingArgumentError)
+        lambda { @transaction.create!(@params.except!(parameter), :store) }.should raise_error(Cielo::MissingArgumentError)
       end
     end
 
     it 'delivers an successful message' do
-      response = @transaction.store_page_create! @params
+      response = @transaction.create! @params, :store
 
       response[:transacao][:tid].should_not be_nil
       response[:transacao][:"url-autenticacao"].should_not be_nil
@@ -39,12 +39,12 @@ describe Cielo::Transaction do
     end
     [:numero, :valor, :bandeira, :"url-retorno"].each do |parameter|
       it "raises an error when #{parameter} isn't informed" do
-        lambda { @transaction.cielo_page_create! @params.except!(parameter) }.should raise_error(Cielo::MissingArgumentError)
+        lambda { @transaction.create! @params.except!(parameter) }.should raise_error(Cielo::MissingArgumentError)
       end
     end
 
     it "delivers an successful message" do
-      response = @transaction.cielo_page_create! @params
+      response = @transaction.create! @params
 
       response[:transacao][:tid].should_not be_nil
       response[:transacao][:"url-autenticacao"].should_not be_nil
@@ -57,7 +57,7 @@ describe Cielo::Transaction do
       FakeWeb.register_uri(:any, "https://qasecommerce.cielo.com.br/servicos/ecommwsec.do",
         :body => "Nothing to be found 'round here",
         :status => ["404", "Not Found"])
-      response = @transaction.cielo_page_create! @params
+      response = @transaction.create! @params
 
       response[:erro].should_not be_nil
       response[:erro][:codigo].should be_eql("000")
@@ -66,7 +66,7 @@ describe Cielo::Transaction do
     it "delivers a response with error message when the server send" do
       FakeWeb.register_uri(:any, "https://qasecommerce.cielo.com.br/servicos/ecommwsec.do",
         :body => "<?xml version=\"1.0\" encoding=\"ISO-8859-1\"?> <erro xmlns=\"http://ecommerce.cbmp.com.br\"> <codigo>001</codigo> <mensagem>Requisição inválida</mensagem> </erro>", :content_type => "application/xml")
-      response = @transaction.cielo_page_create! @params
+      response = @transaction.create! @params
 
       response[:erro].should_not be_nil
       response[:erro][:codigo].should be_eql("001")

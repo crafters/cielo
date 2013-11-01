@@ -5,6 +5,14 @@ module Cielo
       @connection = Cielo::Connection.new
     end
 
+    def create!(parameters = {}, buy_page = :cielo)
+      if buy_page == :store
+        store_page_create!(parameters)
+      else
+        cielo_page_create!(parameters)
+      end
+    end
+
     def store_page_create!(parameters={})
       analysis_parameters(parameters, :buy_page_store)
       message = xml_builder('requisicao-transacao') do |xml|
