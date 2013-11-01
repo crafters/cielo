@@ -47,3 +47,4 @@ tmtags
 
 # For rubinius:
 #*.rbc
+.rvmrc
