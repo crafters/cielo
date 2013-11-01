@@ -3,7 +3,7 @@ require 'spec_helper'
 
 describe Cielo::Transaction do
   let(:default_params) { {:numero => "1", :valor => "100", :bandeira => "visa", :"url-retorno" => "http://some.thing.com"} }
-  let(:card_params) { { cartao_numero: '4012888888881881',  cartao_validade: '201508', cartao_indicador: '1', cartao_seguranca: '973', cartao_portador: 'Nome portador' } }
+  let(:card_params) { { :cartao_numero => '4012888888881881',  :cartao_validade => '201508', :cartao_indicador => '1', :cartao_seguranca => '973', :cartao_portador => 'Nome portador' } }
 
   before do
     @transaction = Cielo::Transaction.new
