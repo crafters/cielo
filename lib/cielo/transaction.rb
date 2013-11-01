@@ -4,7 +4,7 @@ module Cielo
     def initialize
       @connection = Cielo::Connection.new
     end
-    def create!(parameters={})
+    def cielo_page_create!(parameters={})
       analysis_parameters(parameters)
       message = xml_builder("requisicao-transacao") do |xml|
         xml.tag!("dados-pedido") do
@@ -23,16 +23,16 @@ module Cielo
       end
       make_request! message
     end
-    
+
     def verify!(cielo_tid)
       return nil unless cielo_tid
       message = xml_builder("requisicao-consulta", :before) do |xml|
         xml.tid "#{cielo_tid}"
       end
-      
+
       make_request! message
     end
-    
+
     def catch!(cielo_tid)
       return nil unless cielo_tid
       message = xml_builder("requisicao-captura", :before) do |xml|
@@ -40,7 +40,7 @@ module Cielo
       end
       make_request! message
     end
-    
+
     private
     def analysis_parameters(parameters={})
       [:numero, :valor, :bandeira, :"url-retorno"].each do |parameter|
@@ -56,7 +56,7 @@ module Cielo
       parameters.merge!(:"url-retorno" => Cielo.return_path) unless parameters[:"url-retorno"]
       parameters
     end
-    
+
     def xml_builder(group_name, target=:after, &block)
       xml = Builder::XmlMarkup.new
       xml.instruct! :xml, :version=>"1.0", :encoding=>"ISO-8859-1"
@@ -70,14 +70,14 @@ module Cielo
       end
       xml
     end
-    
+
     def make_request!(message)
       params = { :mensagem => message.target! }
-      
+
       result = @connection.request! params
       parse_response(result)
     end
-    
+
     def parse_response(response)
       case response
       when Net::HTTPSuccess
