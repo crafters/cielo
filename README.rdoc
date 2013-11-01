@@ -91,7 +91,7 @@ Se torna necessário somente configurar o módulo Cielo
 
 == Colaboradores
 
-* Antônio Roberto Silva [ http://github.com/devton , http://twitter.com/devton ]
+* Antônio Roberto Silva [ http://github.com/devton , http://twitter.com/dev_ton ]
 * Felipe Rodrigues [ http://github.com/felipero , http://twitter.com/felipero ]
 * Rafael Felix [ http://github.com/fellix , http://twitter.com/rs_felix ]
 * Gabriel Paladino and Scupen [https://github.com/gabpaladino , https://github.com/scupen] (Ruby 1.8.7 support)
