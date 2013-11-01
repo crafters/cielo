@@ -2,7 +2,7 @@
 
 {<img src="https://secure.travis-ci.org/crafters/cielo.png" />}[http://travis-ci.org/crafters/cielo]
 
-Integração com a Cielo via WebServices
+Integração com a Cielo via WebServices [Buy Page Cielo / Buy Page Loja ]
 
 == Funcionalidades Implementadas
 
@@ -16,10 +16,46 @@ Integração com a Cielo via WebServices
 
 === Ambiente de teste (Homologação)
 
+== Buy Page Loja
+
   transaction = Cielo::Transaction.new
-  transaction.create!(numero: "XXX", valor: "123123", moeda: "986", ...) #inicia uma nova transação
+
+  transaction_parameters = {
+    numero: "XXX",
+    valor: "123123",
+    moeda: "986",
+    bandeira: 'visa',
+    :'url-retorno' => 'http://url.retorno',
+    cartao_numero: '4012001037141112',
+    cartao_validade: '201805',
+    cartao_seguranca: '123',
+    cartao_portador: 'Lorem Ipsum Dolor'
+  }
+
+  transaction.store_page_create!() #inicia uma nova transação
+
   transaction.verify!("TID OF THE TRANSACTION") #verifica o status de uma transação
+
   transaction.catch!("TID OF THE TRANSACTION") #captura a transação
+
+== Buy Page Cielo
+
+  transaction = Cielo::Transaction.new
+
+  transaction_parameters = {
+    numero: "XXX",
+    valor: "123123",
+    moeda: "986",
+    bandeira: 'visa',
+    :'url-retorno' => 'http://url.retorno',
+  }
+
+  transaction.cielo_page_create!(transaction_parameters) #inicia uma nova transação
+
+  transaction.verify!("TID OF THE TRANSACTION") #verifica o status de uma transação
+
+  transaction.catch!("TID OF THE TRANSACTION") #captura a transação
+
 
 === Rails
 
@@ -41,7 +77,7 @@ Se torna necessário somente configurar o módulo Cielo
 == Avisos
 
 * O retorno da cielo é convertido em um hash, então, atributos no xml como url-retorno ficam :"url-retorno", cuidado com esses detalhes.
-* Foi desenvolvido e testado em ruby 1.9.2 e 1.8.7
+* Foi desenvolvido e testado em ruby 2.0.0, 1.9.3, 1.9.2 e 1.8.7
 
 == Contributing to cielo
 
@@ -55,8 +91,9 @@ Se torna necessário somente configurar o módulo Cielo
 
 == Colaboradores
 
-* Felipe Rodrigues [ http://github/felipero http://twitter.com/felipero ]
-* Rafael Felix [ http://github/fellix http://twitter.com/rs_felix ]
+* Antônio Roberto Silva [ http://github.com/devton , http://twitter.com/devton ]
+* Felipe Rodrigues [ http://github.com/felipero , http://twitter.com/felipero ]
+* Rafael Felix [ http://github.com/fellix , http://twitter.com/rs_felix ]
 * Gabriel Paladino and Scupen [https://github.com/gabpaladino , https://github.com/scupen] (Ruby 1.8.7 support)
 
 == Copyright
