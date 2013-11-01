@@ -32,7 +32,7 @@ Integração com a Cielo via WebServices [Buy Page Cielo / Buy Page Loja ]
     cartao_portador: 'Lorem Ipsum Dolor'
   }
 
-  transaction.store_page_create!(transaction_parameters) #inicia uma nova transação
+  transaction.create!(transaction_parameters, :store) #inicia uma nova transação
 
   transaction.verify!("TID OF THE TRANSACTION") #verifica o status de uma transação
 
@@ -50,7 +50,7 @@ Integração com a Cielo via WebServices [Buy Page Cielo / Buy Page Loja ]
     :'url-retorno' => 'http://url.retorno',
   }
 
-  transaction.cielo_page_create!(transaction_parameters) #inicia uma nova transação
+  transaction.create!(transaction_parameters, :cielo) #inicia uma nova transação / :cielo é padrão
 
   transaction.verify!("TID OF THE TRANSACTION") #verifica o status de uma transação
 
