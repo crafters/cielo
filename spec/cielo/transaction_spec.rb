@@ -2,23 +2,47 @@
 require 'spec_helper'
 
 describe Cielo::Transaction do
+  let(:default_params) { {:numero => "1", :valor => "100", :bandeira => "visa", :"url-retorno" => "http://some.thing.com"} }
+  let(:card_params) { { cartao_numero: '4012888888881881',  cartao_validade: '201508', cartao_indicador: '1', cartao_seguranca: '973', cartao_portador: 'Nome portador' } }
+
   before do
     @transaction = Cielo::Transaction.new
   end
 
   describe "create a buy page store transaction" do
-    pending
+    before do
+      Cielo.stub(:numero_afiliacao).and_return('1006993069')
+      Cielo.stub(:chave_acesso).and_return('25fbb99741c739dd84d7b06ec78c9bac718838630f30b112d033ce2e621b34f3')
+
+      @params = default_params.merge(card_params)
+    end
+
+    [:cartao_portador, :cartao_numero, :cartao_validade, :cartao_seguranca, :numero, :valor, :bandeira, :"url-retorno"].each do |parameter|
+      it "raises an error when #{parameter} isn't informed" do
+        lambda { @transaction.store_page_create! @params.except!(parameter) }.should raise_error(Cielo::MissingArgumentError)
+      end
+    end
+
+    it 'delivers an successful message' do
+      response = @transaction.store_page_create! @params
+
+      response[:transacao][:tid].should_not be_nil
+      response[:transacao][:"url-autenticacao"].should_not be_nil
+
+      response = @transaction.catch!("1001734898056B3C1001")
+    end
   end
 
   describe "create a buy page cielo transaction" do
     before do
-      @params = {:numero => "1", :valor => "100", :bandeira => "visa", :"url-retorno" => "http://some.thing.com"}
+      @params = default_params
     end
     [:numero, :valor, :bandeira, :"url-retorno"].each do |parameter|
       it "raises an error when #{parameter} isn't informed" do
         lambda { @transaction.cielo_page_create! @params.except!(parameter) }.should raise_error(Cielo::MissingArgumentError)
       end
     end
+
     it "delivers an successful message" do
       response = @transaction.cielo_page_create! @params
 

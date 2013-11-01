@@ -4,22 +4,28 @@ module Cielo
     def initialize
       @connection = Cielo::Connection.new
     end
+
+    def store_page_create!(parameters={})
+      analysis_parameters(parameters, :buy_page_store)
+      message = xml_builder('requisicao-transacao') do |xml|
+        xml.tag!("dados-portador") do
+          xml.tag!('numero', parameters[:cartao_numero])
+          xml.tag!('validade', parameters[:cartao_validade])
+          xml.tag!('indicador', parameters[:cartao_indicador])
+          xml.tag!('codigo-seguranca', parameters[:cartao_seguranca])
+          xml.tag!('nome-portador', parameters[:cartao_portador])
+          xml.tag!('token', '')
+        end
+        default_transaction_xml(xml, parameters)
+      end
+
+      make_request! message
+    end
+
     def cielo_page_create!(parameters={})
-      analysis_parameters(parameters)
+      analysis_parameters(parameters, :buy_page_cielo)
       message = xml_builder("requisicao-transacao") do |xml|
-        xml.tag!("dados-pedido") do
-          [:numero, :valor, :moeda, :"data-hora", :idioma].each do |key|
-            xml.tag!(key.to_s, parameters[key].to_s)
-          end
-        end
-        xml.tag!("forma-pagamento") do
-          [:bandeira, :produto, :parcelas].each do |key|
-            xml.tag!(key.to_s, parameters[key].to_s)
-          end
-        end
-        xml.tag!("url-retorno", parameters[:"url-retorno"])
-        xml.autorizar parameters[:autorizar].to_s
-        xml.capturar parameters[:capturar].to_s
+        default_transaction_xml(xml, parameters)
       end
       make_request! message
     end
@@ -42,10 +48,33 @@ module Cielo
     end
 
     private
-    def analysis_parameters(parameters={})
-      [:numero, :valor, :bandeira, :"url-retorno"].each do |parameter|
+    def default_transaction_xml(xml, parameters)
+      xml.tag!("dados-pedido") do
+        [:numero, :valor, :moeda, :"data-hora", :idioma].each do |key|
+          xml.tag!(key.to_s, parameters[key].to_s)
+        end
+      end
+      xml.tag!("forma-pagamento") do
+        [:bandeira, :produto, :parcelas].each do |key|
+          xml.tag!(key.to_s, parameters[key].to_s)
+        end
+      end
+      xml.tag!("url-retorno", parameters[:"url-retorno"])
+      xml.autorizar parameters[:autorizar].to_s
+      xml.capturar parameters[:capturar].to_s
+    end
+
+    def analysis_parameters(parameters={}, buy_page = :buy_page_cielo)
+      to_analyze = [:numero, :valor, :bandeira, :"url-retorno"]
+
+      if buy_page == :buy_page_store
+        to_analyze.concat([:cartao_numero, :cartao_validade, :cartao_seguranca, :cartao_portador])
+      end
+
+      to_analyze.each do |parameter|
         raise Cielo::MissingArgumentError, "Required parameter #{parameter} not found" unless parameters[parameter]
       end
+
       parameters.merge!(:moeda => "986") unless parameters[:moeda]
       parameters.merge!(:"data-hora" => Time.now.strftime("%Y-%m-%dT%H:%M:%S")) unless parameters[:"data-hora"]
       parameters.merge!(:idioma => "PT") unless parameters[:idioma]
@@ -54,6 +83,7 @@ module Cielo
       parameters.merge!(:autorizar => "2") unless parameters[:autorizar]
       parameters.merge!(:capturar => "true") unless parameters[:capturar]
       parameters.merge!(:"url-retorno" => Cielo.return_path) unless parameters[:"url-retorno"]
+      parameters.merge!(:cartao_indicador => '1') unless parameters[:cartao_indicador] && buy_page == :buy_page_store
       parameters
     end
 
