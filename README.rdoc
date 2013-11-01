@@ -32,7 +32,7 @@ Integração com a Cielo via WebServices [Buy Page Cielo / Buy Page Loja ]
     cartao_portador: 'Lorem Ipsum Dolor'
   }
 
-  transaction.store_page_create!() #inicia uma nova transação
+  transaction.store_page_create!(transaction_parameters) #inicia uma nova transação
 
   transaction.verify!("TID OF THE TRANSACTION") #verifica o status de uma transação
 
