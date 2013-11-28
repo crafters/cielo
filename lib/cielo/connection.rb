@@ -1,3 +1,5 @@
+#encoding: utf-8
+
 module Cielo
   class Connection
     attr_reader :environment
@@ -18,6 +20,34 @@ module Cielo
         str_params+="#{key}=#{value}"
       end
       @http.request_post(self.environment::WS_PATH, str_params)
+    end
+
+    def make_request!(message)
+      params = { :mensagem => message.target! }
+      result = self.request! params
+      parse_response(result)
+    end
+
+    def parse_response(response)
+      case response
+      when Net::HTTPSuccess
+        document = REXML::Document.new(response.body)
+        parse_elements(document.elements)
+      else
+        {:erro => { :codigo => "000", :mensagem => "Impossível contactar o servidor"}}
+      end
+    end
+    
+    def parse_elements(elements)
+      map={}
+      elements.each do |element|
+        element_map = {}
+        element_map = element.text if element.elements.empty? && element.attributes.empty?
+        element_map.merge!("value" => element.text) if element.elements.empty? && !element.attributes.empty?
+        element_map.merge!(parse_elements(element.elements)) unless element.elements.empty?
+        map.merge!(element.name => element_map)
+      end
+      map.symbolize_keys
     end
   end
 end
