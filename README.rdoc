@@ -38,6 +38,36 @@ Integração com a Cielo via WebServices [Buy Page Cielo / Buy Page Loja ]
 
   transaction.catch!("TID OF THE TRANSACTION") #captura a transação
 
+== Buy Page Loja com token
+
+  token_request = Cielo::Token.new
+
+  token_parameters = {
+    :cartao_numero => '4012888888881881',  
+    :cartao_validade => '201508', 
+    :cartao_portador => 'Nome portador' }
+  }
+
+  response = token_request.create! token_parameters, :store
+  # O token pode ser armazenado no banco, será sempre igual para o cartão em questão
+  token = response[:"retorno-token"][:token][:"dados-token"][:"codigo-token"]
+
+  transaction = Cielo::Transaction.new
+
+  transaction_parameters = {
+    numero: "XXX", 
+    valor: "123123",
+    moeda: "986",
+    bandeira: 'visa',
+    parcelas: 2,
+    token: token, # Esse token substitui o cartão de crédito
+    autorizar: 3 # Quando a transação usa token, a tag 'autorizar' precisa ser 3 ou 4
+  }
+
+  transaction.create!(transaction_parameters, :store) #inicia uma nova transação
+
+Caso seja necessário fazer uma transação recorrente, basta alterar a tag autorizar para 4.
+
 == Buy Page Cielo
 
   transaction = Cielo::Transaction.new
