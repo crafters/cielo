@@ -22,6 +22,20 @@ module Cielo
       @http.request_post(self.environment::WS_PATH, str_params)
     end
 
+    def xml_builder(group_name, target=:after, &block)
+      xml = Builder::XmlMarkup.new
+      xml.instruct! :xml, :version=>"1.0", :encoding=>"ISO-8859-1"
+      xml.tag!(group_name, :id => "#{Time.now.to_i}", :versao => "1.2.1") do
+        block.call(xml) if target == :before
+        xml.tag!("dados-ec") do
+          xml.numero Cielo.numero_afiliacao
+          xml.chave Cielo.chave_acesso
+        end
+        block.call(xml) if target == :after
+      end
+      xml
+    end
+
     def make_request!(message)
       params = { :mensagem => message.target! }
       result = self.request! params

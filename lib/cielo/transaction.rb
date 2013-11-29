@@ -15,7 +15,7 @@ module Cielo
 
     def store_page_create!(parameters={})
       analysis_parameters(parameters, :buy_page_store)
-      message = xml_builder('requisicao-transacao') do |xml|
+      message = @connection.xml_builder('requisicao-transacao') do |xml|
         xml.tag!("dados-portador") do
           if parameters[:token].present?
             xml.tag!('token', parameters[:token])  
@@ -31,32 +31,32 @@ module Cielo
         default_transaction_xml(xml, parameters)
       end
 
-      make_request! message
+      @connection.make_request! message
     end
 
     def cielo_page_create!(parameters={})
       analysis_parameters(parameters, :buy_page_cielo)
-      message = xml_builder("requisicao-transacao") do |xml|
+      message = @connection.xml_builder("requisicao-transacao") do |xml|
         default_transaction_xml(xml, parameters)
       end
-      make_request! message
+      @connection.make_request! message
     end
 
     def verify!(cielo_tid)
       return nil unless cielo_tid
-      message = xml_builder("requisicao-consulta", :before) do |xml|
+      message = @connection.xml_builder("requisicao-consulta", :before) do |xml|
         xml.tid "#{cielo_tid}"
       end
 
-      make_request! message
+      @connection.make_request! message
     end
 
     def catch!(cielo_tid)
       return nil unless cielo_tid
-      message = xml_builder("requisicao-captura", :before) do |xml|
+      message = @connection.xml_builder("requisicao-captura", :before) do |xml|
         xml.tid "#{cielo_tid}"
       end
-      make_request! message
+      @connection.make_request! message
     end
 
     private
@@ -106,46 +106,6 @@ module Cielo
       parameters
     end
 
-    def xml_builder(group_name, target=:after, &block)
-      xml = Builder::XmlMarkup.new
-      xml.instruct! :xml, :version=>"1.0", :encoding=>"ISO-8859-1"
-      xml.tag!(group_name, :id => "#{Time.now.to_i}", :versao => "1.2.1") do
-        block.call(xml) if target == :before
-        xml.tag!("dados-ec") do
-          xml.numero Cielo.numero_afiliacao
-          xml.chave Cielo.chave_acesso
-        end
-        block.call(xml) if target == :after
-      end
-      xml
-    end
-
-    def make_request!(message)
-      params = { :mensagem => message.target! }
-
-      result = @connection.request! params
-      parse_response(result)
-    end
-
-    def parse_response(response)
-      case response
-      when Net::HTTPSuccess
-        document = REXML::Document.new(response.body)
-        parse_elements(document.elements)
-      else
-        {:erro => { :codigo => "000", :mensagem => "Impossível contactar o servidor"}}
-      end
-    end
-    def parse_elements(elements)
-      map={}
-      elements.each do |element|
-        element_map = {}
-        element_map = element.text if element.elements.empty? && element.attributes.empty?
-        element_map.merge!("value" => element.text) if element.elements.empty? && !element.attributes.empty?
-        element_map.merge!(parse_elements(element.elements)) unless element.elements.empty?
-        map.merge!(element.name => element_map)
-      end
-      map.symbolize_keys
-    end
+    
   end
 end
