@@ -4,10 +4,71 @@ require 'spec_helper'
 describe Cielo::Transaction do
   let(:default_params) { {:numero => "1", :valor => "100", :bandeira => "visa", :"url-retorno" => "http://some.thing.com"} }
   let(:card_params) { { :cartao_numero => '4012888888881881',  :cartao_validade => '201508', :cartao_indicador => '1', :cartao_seguranca => '973', :cartao_portador => 'Nome portador' } }
+  let(:card_token_params) { { :cartao_numero => '4012888888881881',  :cartao_validade => '201508', :cartao_portador => 'Nome portador' } }
 
   before do
     @transaction = Cielo::Transaction.new
+    @token = Cielo::Token.new
   end
+
+  describe "create a buy page store transaction with token" do 
+    before do 
+      Cielo.stub(:numero_afiliacao).and_return('1006993069')
+      Cielo.stub(:chave_acesso).and_return('25fbb99741c739dd84d7b06ec78c9bac718838630f30b112d033ce2e621b34f3')
+      response = @token.create! card_token_params, :store
+      token = response[:"retorno-token"][:token][:"dados-token"][:"codigo-token"]
+
+      @params = default_params.merge(:token => token, :autorizar => 3)
+    end
+
+    it 'delivers an successful message' do
+      response = @transaction.create! @params, :store
+
+      # 7 is when transactions was not autenticated
+      response[:transacao][:autenticacao][:eci].should eq("7")
+    end
+  end
+
+
+  describe "create a buy page store recurrent transaction with token" do 
+    before do 
+      Cielo.stub(:numero_afiliacao).and_return('1006993069')
+      Cielo.stub(:chave_acesso).and_return('25fbb99741c739dd84d7b06ec78c9bac718838630f30b112d033ce2e621b34f3')
+      response = @token.create! card_token_params, :store
+      token = response[:"retorno-token"][:token][:"dados-token"][:"codigo-token"]
+
+      # #autorizar => 4 indicates recurring transaction
+      @params = default_params.merge(:token => token, :autorizar => 4)
+    end
+
+    it 'delivers an successful message' do
+      response = @transaction.create! @params, :store
+
+      # 7 is when transactions was not autenticated
+      response[:transacao][:autenticacao][:eci].should eq("7")
+    end
+  end
+
+  # Error on system whe uses gerar-token => true (Verify with Cielo)
+  # describe "create a buy page store transaction with token generation" do 
+  #   before do
+  #     Cielo.stub(:numero_afiliacao).and_return('1006993069')
+  #     Cielo.stub(:chave_acesso).and_return('25fbb99741c739dd84d7b06ec78c9bac718838630f30b112d033ce2e621b34f3')
+
+  #     default_params.merge!(:"gerar-token" => false)
+
+  #     @params = default_params.merge(card_params)
+  #   end
+
+  #   it 'delivers an successful message and have a card token' do
+  #     response = @transaction.create! @params, :store
+
+  #     response[:transacao][:tid].should_not be_nil
+  #     response[:transacao][:"url-autenticacao"].should_not be_nil
+  #     # Verifies if token is not nil, it can be used for future transactions
+  #     response[:transacao][:"codigo-token"].should_not be_nil
+  #   end
+  # end
 
   describe "create a buy page store transaction" do
     before do

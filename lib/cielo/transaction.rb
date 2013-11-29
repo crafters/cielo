@@ -17,12 +17,16 @@ module Cielo
       analysis_parameters(parameters, :buy_page_store)
       message = xml_builder('requisicao-transacao') do |xml|
         xml.tag!("dados-portador") do
-          xml.tag!('numero', parameters[:cartao_numero])
-          xml.tag!('validade', parameters[:cartao_validade])
-          xml.tag!('indicador', parameters[:cartao_indicador])
-          xml.tag!('codigo-seguranca', parameters[:cartao_seguranca])
-          xml.tag!('nome-portador', parameters[:cartao_portador])
-          xml.tag!('token', '')
+          if parameters[:token].present?
+            xml.tag!('token', parameters[:token])  
+          else
+            xml.tag!('numero', parameters[:cartao_numero])
+            xml.tag!('validade', parameters[:cartao_validade])
+            xml.tag!('indicador', parameters[:cartao_indicador])
+            xml.tag!('codigo-seguranca', parameters[:cartao_seguranca])
+            xml.tag!('nome-portador', parameters[:cartao_portador])
+            xml.tag!('token', '')
+          end
         end
         default_transaction_xml(xml, parameters)
       end
@@ -70,13 +74,18 @@ module Cielo
       xml.tag!("url-retorno", parameters[:"url-retorno"])
       xml.autorizar parameters[:autorizar].to_s
       xml.capturar parameters[:capturar].to_s
+      xml.tag!("gerar-token", parameters[:"gerar-token"])
     end
 
     def analysis_parameters(parameters={}, buy_page = :buy_page_cielo)
       to_analyze = [:numero, :valor, :bandeira, :"url-retorno"]
 
       if buy_page == :buy_page_store
-        to_analyze.concat([:cartao_numero, :cartao_validade, :cartao_seguranca, :cartao_portador])
+        if parameters[:token]
+          to_analyze.concat([:token])  
+        else
+          to_analyze.concat([:cartao_numero, :cartao_validade, :cartao_seguranca, :cartao_portador])
+        end
       end
 
       to_analyze.each do |parameter|
@@ -92,13 +101,15 @@ module Cielo
       parameters.merge!(:capturar => "true") unless parameters[:capturar]
       parameters.merge!(:"url-retorno" => Cielo.return_path) unless parameters[:"url-retorno"]
       parameters.merge!(:cartao_indicador => '1') unless parameters[:cartao_indicador] && buy_page == :buy_page_store
+      parameters.merge!(:"gerar-token" => false) unless parameters[:"gerar-token"]
+
       parameters
     end
 
     def xml_builder(group_name, target=:after, &block)
       xml = Builder::XmlMarkup.new
       xml.instruct! :xml, :version=>"1.0", :encoding=>"ISO-8859-1"
-      xml.tag!(group_name, :id => "#{Time.now.to_i}", :versao => "1.1.0") do
+      xml.tag!(group_name, :id => "#{Time.now.to_i}", :versao => "1.2.1") do
         block.call(xml) if target == :before
         xml.tag!("dados-ec") do
           xml.numero Cielo.numero_afiliacao
