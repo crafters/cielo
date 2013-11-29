@@ -18,7 +18,7 @@ describe Cielo::Transaction do
       response = @token.create! card_token_params, :store
       token = response[:"retorno-token"][:token][:"dados-token"][:"codigo-token"]
 
-      @params = default_params.merge(:token => token, autorizar: 3)
+      @params = default_params.merge(:token => token, :autorizar => 3)
     end
 
     it 'delivers an successful message' do
@@ -37,8 +37,8 @@ describe Cielo::Transaction do
       response = @token.create! card_token_params, :store
       token = response[:"retorno-token"][:token][:"dados-token"][:"codigo-token"]
 
-      # autorizar: 4 indicates recurring transaction
-      @params = default_params.merge(:token => token, autorizar: 4)
+      # #autorizar => 4 indicates recurring transaction
+      @params = default_params.merge(:token => token, :autorizar => 4)
     end
 
     it 'delivers an successful message' do
