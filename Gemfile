@@ -10,7 +10,7 @@ gem 'builder', ">= 2.0.0", "< 3.1.0"
 group :development do
   gem "shoulda", ">= 0"
   gem "bundler"
-  gem "jeweler", "~> 1.8.3"
+  gem "jeweler"
 	gem "rspec"
 	gem "fakeweb"
 end
