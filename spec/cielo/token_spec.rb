@@ -17,6 +17,9 @@ describe Cielo::Token do
     end
 
     it 'delivers an successful message and have a card token' do
+      FakeWeb.register_uri(:any, "https://qasecommerce.cielo.com.br/servicos/ecommwsec.do",
+        :body => "<?xml version=\"1.0\" encoding=\"ISO-8859-1\"?><retorno-token versao=\"1.2.1\" id=\"57239017\" xmlns=\"http://ecommerce.cbmp.com.br\"><token><dados-token><codigo-token>TuS6LeBHWjqFFtE7S3zR052Jl/KUlD+tYJFpAdlA87E=</codigo-token><status>1</status><numero-cartao-truncado>455187******0183</numero-cartao-truncado></dados-token></token></retorno-token>", :content_type => "application/xml")
+      
       response = @token.create! @params, :store
       
       response[:"retorno-token"][:token][:"dados-token"][:"codigo-token"].should_not be_nil
