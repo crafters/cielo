@@ -59,6 +59,14 @@ module Cielo
       @connection.make_request! message
     end
 
+    def authorize!(cielo_tid)
+      return nil unless cielo_tid
+      message = @connection.xml_builder("requisicao-autorizacao-tid", :before) do |xml|
+        xml.tid "#{cielo_tid}"
+      end
+      @connection.make_request! message
+    end
+
     private
     def default_transaction_xml(xml, parameters)
       xml.tag!("dados-pedido") do
@@ -81,7 +89,7 @@ module Cielo
       to_analyze = [:numero, :valor, :bandeira, :"url-retorno"]
 
       if buy_page == :buy_page_store
-        if parameters[:token]
+        if parameters[:token].present?
           to_analyze.concat([:token])  
         else
           to_analyze.concat([:cartao_numero, :cartao_validade, :cartao_seguranca, :cartao_portador])

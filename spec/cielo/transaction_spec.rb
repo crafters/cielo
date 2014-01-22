@@ -5,6 +5,7 @@ describe Cielo::Transaction do
   let(:default_params) { {:numero => "1", :valor => "100", :bandeira => "visa", :"url-retorno" => "http://some.thing.com"} }
   let(:card_params) { { :cartao_numero => '4012888888881881',  :cartao_validade => '201508', :cartao_indicador => '1', :cartao_seguranca => '973', :cartao_portador => 'Nome portador' } }
   let(:card_token_params) { { :cartao_numero => '4012888888881881',  :cartao_validade => '201508', :cartao_portador => 'Nome portador' } }
+  let(:authentication_card_params){ { :cartao_numero => '5453010000066167', :cartao_validade => '201805', :cartao_seguranca => "123", :cartao_portador => "Nome portador" }}
 
   before do
     @transaction = Cielo::Transaction.new
@@ -34,10 +35,16 @@ describe Cielo::Transaction do
       # 7 is when transactions was not autenticated
       response[:transacao][:autenticacao][:eci].should eq("7")
     end
+  end
 
+  describe "create a recurring transaction with token" do
     before do 
       Cielo.stub(:numero_afiliacao).and_return('1006993069')
       Cielo.stub(:chave_acesso).and_return('25fbb99741c739dd84d7b06ec78c9bac718838630f30b112d033ce2e621b34f3')
+
+      FakeWeb.register_uri(:any, "https://qasecommerce.cielo.com.br/servicos/ecommwsec.do",
+        :body => "<?xml version=\"1.0\" encoding=\"ISO-8859-1\"?><retorno-token versao=\"1.2.1\" id=\"57239017\" xmlns=\"http://ecommerce.cbmp.com.br\"><token><dados-token><codigo-token>TuS6LeBHWjqFFtE7S3zR052Jl/KUlD+tYJFpAdlA87E=</codigo-token><status>1</status><numero-cartao-truncado>455187******0183</numero-cartao-truncado></dados-token></token></retorno-token>", :content_type => "application/xml")
+
       response = @token.create! card_token_params, :store
       token = response[:"retorno-token"][:token][:"dados-token"][:"codigo-token"]
 
@@ -56,26 +63,27 @@ describe Cielo::Transaction do
     end
   end
 
-  # Error on system whe uses gerar-token => true (Verify with Cielo)
-  # describe "create a buy page store transaction with token generation" do 
-  #   before do
-  #     Cielo.stub(:numero_afiliacao).and_return('1006993069')
-  #     Cielo.stub(:chave_acesso).and_return('25fbb99741c739dd84d7b06ec78c9bac718838630f30b112d033ce2e621b34f3')
+  # Error on system when uses gerar-token => true (Verify with Cielo)
+  describe "create a buy page store transaction with token generation" do 
+    before do
+      FakeWeb.register_uri(:any, "https://qasecommerce.cielo.com.br/servicos/ecommwsec.do",
+        :body => "<?xml version=\"1.0\" encoding=\"ISO-8859-1\"?><transacao versao=\"1.2.1\" id=\"1390315327\" xmlns=\"http://ecommerce.cbmp.com.br\"><tid>10069930690DCC341001</tid><pan>52WC7RsmcNuEUSjrYWAEhCOjoLMnMCm4KMTQBqN7PdM=</pan><dados-pedido><numero>1</numero><valor>100</valor><moeda>986</moeda><data-hora>2014-01-21T12:42:08.865-02:00</data-hora><idioma>PT</idioma><taxa-embarque>0</taxa-embarque></dados-pedido><forma-pagamento><bandeira>visa</bandeira><produto>1</produto><parcelas>1</parcelas></forma-pagamento><status>6</status><autenticacao><codigo>6</codigo><mensagem>Transacao sem autenticacao</mensagem><data-hora>2014-01-21T12:42:08.872-02:00</data-hora><valor>100</valor><eci>7</eci></autenticacao><autorizacao><codigo>6</codigo><mensagem>Transa??o autorizada</mensagem><data-hora>2014-01-21T12:42:08.885-02:00</data-hora><valor>100</valor><lr>00</lr><arp>123456</arp><nsu>904244</nsu></autorizacao><captura><codigo>6</codigo><mensagem>Transacao capturada com sucesso</mensagem><data-hora>2014-01-21T12:42:08.912-02:00</data-hora><valor>100</valor></captura><token><dados-token><codigo-token>2ta/YqYaeyolf2NHkBWO8grPqZE44j3PvRAQxVQQGgE=</codigo-token><status>1</status><numero-cartao-truncado>401288******1881</numero-cartao-truncado></dados-token></token></transacao>", :content_type => "application/xml")
 
-  #     default_params.merge!(:"gerar-token" => false)
+      Cielo.stub(:numero_afiliacao).and_return('1006993069')
+      Cielo.stub(:chave_acesso).and_return('25fbb99741c739dd84d7b06ec78c9bac718838630f30b112d033ce2e621b34f3')
 
-  #     @params = default_params.merge(card_params)
-  #   end
+      default_params.merge!(:"gerar-token" => true, :autorizar => 3)
 
-  #   it 'delivers an successful message and have a card token' do
-  #     response = @transaction.create! @params, :store
+      @params = default_params.merge(card_params)
+    end
 
-  #     response[:transacao][:tid].should_not be_nil
-  #     response[:transacao][:"url-autenticacao"].should_not be_nil
-  #     # Verifies if token is not nil, it can be used for future transactions
-  #     response[:transacao][:"codigo-token"].should_not be_nil
-  #   end
-  # end
+    it 'delivers an successful message and have a card token' do
+      response = @transaction.create! @params, :store
+
+      response[:transacao][:tid].should_not be_nil
+      response[:transacao][:token][:"dados-token"][:"codigo-token"].should_not be_nil
+    end
+  end
 
   describe "create a buy page store transaction" do
     before do
