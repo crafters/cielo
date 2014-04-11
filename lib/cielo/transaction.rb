@@ -67,6 +67,14 @@ module Cielo
       @connection.make_request! message
     end
 
+    def cancel!(cielo_tid)
+      return nil unless cielo_tid
+      message = @connection.xml_builder("requisicao-cancelamento", :before) do |xml|
+        xml.tid "#{cielo_tid}"
+      end
+      @connection.make_request! message      
+    end
+
     private
     def default_transaction_xml(xml, parameters)
       xml.tag!("dados-pedido") do
