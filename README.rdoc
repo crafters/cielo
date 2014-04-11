@@ -8,7 +8,8 @@ Integração com a Cielo via WebServices [Buy Page Cielo / Buy Page Loja ]
 
 * Criação de transação
 * Consulta de stauts de transação
-* Caputra de transação
+* Captura de transação
+* Cancelamento de transação
 
 == USO
 
@@ -37,6 +38,8 @@ Integração com a Cielo via WebServices [Buy Page Cielo / Buy Page Loja ]
   transaction.verify!("TID OF THE TRANSACTION") #verifica o status de uma transação
 
   transaction.catch!("TID OF THE TRANSACTION") #captura a transação
+
+  transaction.cancel!("TID OF THE TRANSACTION") #cancela a transação
 
 == Buy Page Loja com token
 
@@ -87,7 +90,8 @@ Uma transação com um o campo "gerar-token" => true, gera um token corresponden
   transaction.verify!("TID OF THE TRANSACTION") #verifica o status de uma transação
 
   transaction.catch!("TID OF THE TRANSACTION") #captura a transação
-
+  
+  transaction.cancel!("TID OF THE TRANSACTION") #captura a transação
 
 === Rails
 
@@ -128,6 +132,7 @@ Se torna necessário somente configurar o módulo Cielo
 * Rafael Felix [ http://github.com/fellix , http://twitter.com/rs_felix ]
 * Gabriel Paladino and Scupen [https://github.com/gabpaladino , https://github.com/scupen] (Ruby 1.8.7 support)
 * Wilbert Ribeiro [https://github.com/wilbert/cielo, https://twitter.com/wilbertribeiro ]
+* Elton Okada [https://github.com/eltonokada, https://twitter.com/eltonokada ]
 
 == Copyright
 
