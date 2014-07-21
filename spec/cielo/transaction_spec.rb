@@ -12,8 +12,8 @@ describe Cielo::Transaction do
     @token = Cielo::Token.new
   end
 
-  describe "create a buy page store transaction with token" do 
-    before do 
+  describe "create a buy page store transaction with token" do
+    before do
       Cielo.stub(:numero_afiliacao).and_return('1006993069')
       Cielo.stub(:chave_acesso).and_return('25fbb99741c739dd84d7b06ec78c9bac718838630f30b112d033ce2e621b34f3')
 
@@ -38,7 +38,7 @@ describe Cielo::Transaction do
   end
 
   describe "create a recurring transaction with token" do
-    before do 
+    before do
       Cielo.stub(:numero_afiliacao).and_return('1006993069')
       Cielo.stub(:chave_acesso).and_return('25fbb99741c739dd84d7b06ec78c9bac718838630f30b112d033ce2e621b34f3')
 
@@ -64,7 +64,7 @@ describe Cielo::Transaction do
   end
 
   # Error on system when uses gerar-token => true (Verify with Cielo)
-  describe "create a buy page store transaction with token generation" do 
+  describe "create a buy page store transaction with token generation" do
     before do
       FakeWeb.register_uri(:any, "https://qasecommerce.cielo.com.br/servicos/ecommwsec.do",
         :body => "<?xml version=\"1.0\" encoding=\"ISO-8859-1\"?><transacao versao=\"1.2.1\" id=\"1390315327\" xmlns=\"http://ecommerce.cbmp.com.br\"><tid>10069930690DCC341001</tid><pan>52WC7RsmcNuEUSjrYWAEhCOjoLMnMCm4KMTQBqN7PdM=</pan><dados-pedido><numero>1</numero><valor>100</valor><moeda>986</moeda><data-hora>2014-01-21T12:42:08.865-02:00</data-hora><idioma>PT</idioma><taxa-embarque>0</taxa-embarque></dados-pedido><forma-pagamento><bandeira>visa</bandeira><produto>1</produto><parcelas>1</parcelas></forma-pagamento><status>6</status><autenticacao><codigo>6</codigo><mensagem>Transacao sem autenticacao</mensagem><data-hora>2014-01-21T12:42:08.872-02:00</data-hora><valor>100</valor><eci>7</eci></autenticacao><autorizacao><codigo>6</codigo><mensagem>Transa??o autorizada</mensagem><data-hora>2014-01-21T12:42:08.885-02:00</data-hora><valor>100</valor><lr>00</lr><arp>123456</arp><nsu>904244</nsu></autorizacao><captura><codigo>6</codigo><mensagem>Transacao capturada com sucesso</mensagem><data-hora>2014-01-21T12:42:08.912-02:00</data-hora><valor>100</valor></captura><token><dados-token><codigo-token>2ta/YqYaeyolf2NHkBWO8grPqZE44j3PvRAQxVQQGgE=</codigo-token><status>1</status><numero-cartao-truncado>401288******1881</numero-cartao-truncado></dados-token></token></transacao>", :content_type => "application/xml")
@@ -209,6 +209,17 @@ describe Cielo::Transaction do
 
     it "must use the production environment" do
       Cielo.numero_afiliacao.should be_eql "1001734891"
+    end
+
+    it "must use the production client number" do
+      @connection = Cielo::Connection.new
+      @connection.numero_afiliacao.should be_eql "1001734891"
+    end
+
+    it "must use the configuration informed" do
+      @connection2 = Cielo::Connection.new "0100100100", "e84827130b9837473681c2787007da5914d6359947015a5cdb2b8843db0fa800"
+      @connection2.numero_afiliacao.should be_eql "0100100100"
+      @connection2.chave_acesso.should be_eql "e84827130b9837473681c2787007da5914d6359947015a5cdb2b8843db0fa800"
     end
 
   end

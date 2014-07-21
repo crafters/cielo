@@ -1,8 +1,14 @@
 #encoding: utf-8
 module Cielo
   class Transaction
-    def initialize
-      @connection = Cielo::Connection.new
+
+    attr_reader :numero_afiliacao
+    attr_reader :chave_acesso
+
+    def initialize numero_afiliacao = Cielo.numero_afiliacao, chave_acesso = Cielo.chave_acesso
+      @numero_afiliacao = numero_afiliacao
+      @chave_acesso = chave_acesso
+      @connection = Cielo::Connection.new @numero_afiliacao, @chave_acesso
     end
 
     def create!(parameters = {}, buy_page = :cielo)
@@ -18,7 +24,7 @@ module Cielo
       message = @connection.xml_builder('requisicao-transacao') do |xml|
         xml.tag!("dados-portador") do
           if parameters[:token].present?
-            xml.tag!('token', parameters[:token])  
+            xml.tag!('token', parameters[:token])
           else
             xml.tag!('numero', parameters[:cartao_numero])
             xml.tag!('validade', parameters[:cartao_validade])
@@ -72,7 +78,7 @@ module Cielo
       message = @connection.xml_builder("requisicao-cancelamento", :before) do |xml|
         xml.tid "#{cielo_tid}"
       end
-      @connection.make_request! message      
+      @connection.make_request! message
     end
 
     private
@@ -98,7 +104,7 @@ module Cielo
 
       if buy_page == :buy_page_store
         if parameters[:token].present?
-          to_analyze.concat([:token])  
+          to_analyze.concat([:token])
         else
           to_analyze.concat([:cartao_numero, :cartao_validade, :cartao_seguranca, :cartao_portador])
         end
@@ -122,6 +128,6 @@ module Cielo
       parameters
     end
 
-    
+
   end
 end
