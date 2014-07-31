@@ -3,8 +3,13 @@
 module Cielo
   class Connection
     attr_reader :environment
-    def initialize
+    attr_reader :numero_afiliacao
+    attr_reader :chave_acesso
+
+    def initialize numero_afiliacao = Cielo.numero_afiliacao, chave_acesso = Cielo.chave_acesso
       @environment = eval(Cielo.environment.to_s.capitalize)
+      @numero_afiliacao = numero_afiliacao
+      @chave_acesso = chave_acesso
       port = 443
       @http = Net::HTTP.new(@environment::BASE_URL,port)
       @http.ssl_version = :SSLv3 if @http.respond_to? :ssl_version
@@ -12,10 +17,10 @@ module Cielo
       @http.open_timeout = 10*1000
       @http.read_timeout = 40*1000
     end
-    
+
     def request!(params={})
       str_params = ""
-      params.each do |key, value| 
+      params.each do |key, value|
         str_params+="&" unless str_params.empty?
         str_params+="#{key}=#{value}"
       end
@@ -28,8 +33,8 @@ module Cielo
       xml.tag!(group_name, :id => "#{Time.now.to_i}", :versao => "1.2.1") do
         block.call(xml) if target == :before
         xml.tag!("dados-ec") do
-          xml.numero Cielo.numero_afiliacao
-          xml.chave Cielo.chave_acesso
+          xml.numero @numero_afiliacao #Cielo.numero_afiliacao
+          xml.chave @chave_acesso #Cielo.chave_acesso
         end
         block.call(xml) if target == :after
       end
@@ -51,7 +56,7 @@ module Cielo
         {:erro => { :codigo => "000", :mensagem => "Impossível contactar o servidor"}}
       end
     end
-    
+
     def parse_elements(elements)
       map={}
       elements.each do |element|
