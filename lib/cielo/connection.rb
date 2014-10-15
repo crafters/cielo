@@ -24,6 +24,8 @@ module Cielo
         str_params+="&" unless str_params.empty?
         str_params+="#{key}=#{value}"
       end
+      
+      str_params = str_params.remove('<to_s/>')
       @http.request_post(self.environment::WS_PATH, str_params)
     end
 
