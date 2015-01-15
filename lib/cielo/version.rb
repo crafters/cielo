@@ -1,8 +1,6 @@
 module Cielo
-  module Version
-    MAJOR = 0
-    MINOR = 1
-    PATCH = 6
-    STRING = "#{MAJOR}.#{MINOR}.#{PATCH}"
-  end
+  MAJOR = 0
+  MINOR = 1
+  PATCH = 6
+  VERSION = "#{MAJOR}.#{MINOR}.#{PATCH}"
 end
