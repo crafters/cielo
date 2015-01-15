@@ -51,7 +51,6 @@ tmtags
 #*.rbc
 .rvmrc
 
-*.gem
 *.rbc
 .bundle
 .config
