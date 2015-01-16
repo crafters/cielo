@@ -13,7 +13,7 @@ module Cielo
       port = 443
       @http = Net::HTTP.new(@environment::BASE_URL,port)
       #@http.ssl_version = :SSLv3 if @http.respond_to? :ssl_version
-      #@http.use_ssl = true
+      @http.use_ssl = true
       @http.open_timeout = 10*1000
       @http.read_timeout = 40*1000
     end
