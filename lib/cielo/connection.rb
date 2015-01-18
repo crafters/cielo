@@ -12,10 +12,10 @@ module Cielo
       @chave_acesso = chave_acesso
       port = 443
       @http = Net::HTTP.new(@environment::BASE_URL,port)
-      @http.ssl_version = :SSLv3 if @http.respond_to? :ssl_version
       @http.use_ssl = true
       @http.open_timeout = 10*1000
       @http.read_timeout = 40*1000
+      # TODO add it to store request only! @http.ssl_version = :SSLv3 if @http.respond_to? :ssl_version
     end
 
     def request!(params={})
@@ -24,6 +24,8 @@ module Cielo
         str_params+="&" unless str_params.empty?
         str_params+="#{key}=#{value}"
       end
+      
+      str_params = str_params.remove('<to_s/>')
       @http.request_post(self.environment::WS_PATH, str_params)
     end
 

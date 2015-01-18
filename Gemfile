@@ -1,4 +1,6 @@
 source "http://rubygems.org"
+#ruby=2.1.2@cielo
+
 # Add dependencies required to use your gem here.
 # Example:
 gem "activesupport", ">= 3.0.7"
