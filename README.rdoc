@@ -2,6 +2,8 @@
 
 {<img src="https://secure.travis-ci.org/crafters/cielo.png" />}[http://travis-ci.org/crafters/cielo]
 
+{<img src="https://codeclimate.com/github/crafters/cielo/badges/gpa.svg" />}[https://codeclimate.com/github/crafters/cielo]
+
 Integração com a Cielo via WebServices [Buy Page Cielo / Buy Page Loja ]
 
 == Funcionalidades Implementadas
