@@ -6,6 +6,7 @@ require "net/http"
 require "net/https"
 require "rexml/document"
 require "builder"
+require 'uri'
 [:string, :connection, :transaction, :token].each { |lib| require "cielo/#{lib}" }
 
 module Cielo
@@ -28,6 +29,8 @@ module Cielo
   mattr_accessor :chave_acesso
   @@return_path = "http://localhost:3000"
   mattr_accessor :return_path
+  @@proxy = {}
+  mattr_accessor :proxy
 
   def self.setup
     yield self

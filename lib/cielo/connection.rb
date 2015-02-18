@@ -11,11 +11,13 @@ module Cielo
       @numero_afiliacao = numero_afiliacao
       @chave_acesso = chave_acesso
       port = 443
-      @http = Net::HTTP.new(@environment::BASE_URL,port)
+
+      # if behind a proxy so set it up here
+      Cielo.proxy.empty? ? @http = Net::HTTP.new(@environment::BASE_URL,port) : @http = Net::HTTP.new(@environment::BASE_URL,port, Cielo.proxy[:host], Cielo.proxy[:port], Cielo.proxy[:login], Cielo.proxy[:password])
+
       @http.use_ssl = true
       @http.open_timeout = 10*1000
       @http.read_timeout = 40*1000
-      # TODO add it to store request only! @http.ssl_version = :SSLv3 if @http.respond_to? :ssl_version
     end
 
     def request!(params={})

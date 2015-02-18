@@ -3,6 +3,14 @@
 Cielo.setup do |config|
   # Altere para production ao final dos seus testes
   # config.environment = :test
+
+  # Edit it only if you need to setup a proxy
+  # config.proxy = {
+  #   host: 'your.proxy.host',
+  #   port: 'your_port',
+  #   login: 'your_login',
+  #   password: 'your_password'
+  # }
   
   # Número de afiliação fornecido pela cielo.
   # O numero padrão é o número usado para testes. 
