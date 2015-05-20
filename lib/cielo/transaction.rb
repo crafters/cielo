@@ -4,11 +4,13 @@ module Cielo
 
     attr_reader :numero_afiliacao
     attr_reader :chave_acesso
+    attr_reader :versao
 
-    def initialize numero_afiliacao = Cielo.numero_afiliacao, chave_acesso = Cielo.chave_acesso
+    def initialize numero_afiliacao = Cielo.numero_afiliacao, chave_acesso = Cielo.chave_acesso, versao = '1.1.1'
       @numero_afiliacao = numero_afiliacao
       @chave_acesso = chave_acesso
-      @connection = Cielo::Connection.new @numero_afiliacao, @chave_acesso
+      @versao = versao
+      @connection = Cielo::Connection.new @numero_afiliacao, @chave_acesso, @versao
     end
 
     def create!(parameters = {}, buy_page = :cielo)
@@ -73,10 +75,11 @@ module Cielo
       @connection.make_request! message
     end
 
-    def cancel!(cielo_tid)
+    def cancel!(cielo_tid, valor=nil)
       return nil unless cielo_tid
       message = @connection.xml_builder("requisicao-cancelamento", :before) do |xml|
         xml.tid "#{cielo_tid}"
+        xml.valor "#{valor}" if valor.to_d > 0
       end
       @connection.make_request! message
     end

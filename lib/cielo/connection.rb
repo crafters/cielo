@@ -5,11 +5,13 @@ module Cielo
     attr_reader :environment
     attr_reader :numero_afiliacao
     attr_reader :chave_acesso
+    attr_reader :versao
 
-    def initialize numero_afiliacao = Cielo.numero_afiliacao, chave_acesso = Cielo.chave_acesso
+    def initialize numero_afiliacao = Cielo.numero_afiliacao, chave_acesso = Cielo.chave_acesso, versao = '1.1.1'
       @environment = eval(Cielo.environment.to_s.capitalize)
       @numero_afiliacao = numero_afiliacao
       @chave_acesso = chave_acesso
+      @versao = versao
       port = 443
       @http = Net::HTTP.new(@environment::BASE_URL,port)
       @http.ssl_version = :TLSv1 if @http.respond_to? :ssl_version
@@ -30,7 +32,7 @@ module Cielo
     def xml_builder(group_name, target=:after, &block)
       xml = Builder::XmlMarkup.new
       xml.instruct! :xml, :version=>"1.0", :encoding=>"ISO-8859-1"
-      xml.tag!(group_name, :id => "#{Time.now.to_i}", :versao => "1.1.1") do
+      xml.tag!(group_name, :id => "#{Time.now.to_i}", :versao => @versao) do
         block.call(xml) if target == :before
         xml.tag!("dados-ec") do
           xml.numero @numero_afiliacao #Cielo.numero_afiliacao
