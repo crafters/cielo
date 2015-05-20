@@ -23,20 +23,22 @@ module Cielo
 
     def store_page_create!(parameters={})
       analysis_parameters(parameters, :buy_page_store)
-      message = @connection.xml_builder('requisicao-transacao') do |xml|
-        xml.tag!("dados-portador") do
-          if parameters[:token].present?
-            xml.tag!('token', parameters[:token])
-          else
-            xml.tag!('numero', parameters[:cartao_numero])
-            xml.tag!('validade', parameters[:cartao_validade])
-            xml.tag!('indicador', parameters[:cartao_indicador])
-            xml.tag!('codigo-seguranca', parameters[:cartao_seguranca])
-            xml.tag!('nome-portador', parameters[:cartao_portador])
-            xml.tag!('token', '')
+      message = @connection.xml_builder('requisicao-transacao') do |xml, target|
+        if target == :after
+          xml.tag!("dados-portador") do
+            if parameters[:token].present?
+              xml.tag!('token', parameters[:token])
+            else
+              xml.tag!('numero', parameters[:cartao_numero])
+              xml.tag!('validade', parameters[:cartao_validade])
+              xml.tag!('indicador', parameters[:cartao_indicador])
+              xml.tag!('codigo-seguranca', parameters[:cartao_seguranca])
+              xml.tag!('nome-portador', parameters[:cartao_portador])
+              xml.tag!('token', '')
+            end
           end
+          default_transaction_xml(xml, parameters)
         end
-        default_transaction_xml(xml, parameters)
       end
 
       @connection.make_request! message
@@ -44,16 +46,20 @@ module Cielo
 
     def cielo_page_create!(parameters={})
       analysis_parameters(parameters, :buy_page_cielo)
-      message = @connection.xml_builder("requisicao-transacao") do |xml|
-        default_transaction_xml(xml, parameters)
+      message = @connection.xml_builder("requisicao-transacao") do |xml, target|
+        if target == :after
+          default_transaction_xml(xml, parameters)
+        end
       end
       @connection.make_request! message
     end
 
     def verify!(cielo_tid)
       return nil unless cielo_tid
-      message = @connection.xml_builder("requisicao-consulta", :before) do |xml|
-        xml.tid "#{cielo_tid}"
+      message = @connection.xml_builder("requisicao-consulta") do |xml, target|
+        if target == :before
+          xml.tid "#{cielo_tid}"
+        end
       end
 
       @connection.make_request! message
@@ -61,25 +67,33 @@ module Cielo
 
     def catch!(cielo_tid)
       return nil unless cielo_tid
-      message = @connection.xml_builder("requisicao-captura", :before) do |xml|
-        xml.tid "#{cielo_tid}"
+      message = @connection.xml_builder("requisicao-captura") do |xml, target|
+        if target == :before
+          xml.tid "#{cielo_tid}"
+        end
       end
       @connection.make_request! message
     end
 
     def authorize!(cielo_tid)
       return nil unless cielo_tid
-      message = @connection.xml_builder("requisicao-autorizacao-tid", :before) do |xml|
-        xml.tid "#{cielo_tid}"
+      message = @connection.xml_builder("requisicao-autorizacao-tid") do |xml, target|
+        if target == :before
+          xml.tid "#{cielo_tid}"
+        end
       end
       @connection.make_request! message
     end
 
     def cancel!(cielo_tid, valor=nil)
       return nil unless cielo_tid
-      message = @connection.xml_builder("requisicao-cancelamento", :before) do |xml|
-        xml.tid "#{cielo_tid}"
-        xml.valor "#{valor}" if valor.to_d > 0
+      message = @connection.xml_builder("requisicao-cancelamento") do |xml, target|
+        if target == :before
+          xml.tid "#{cielo_tid}"
+        end
+        if target == :after
+          xml.valor "#{valor}" if valor.to_d > 0
+        end
       end
       @connection.make_request! message
     end
