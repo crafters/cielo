@@ -106,7 +106,7 @@ module Cielo
         if parameters[:token].present?
           to_analyze.concat([:token])
         else
-          to_analyze.concat([:cartao_numero, :cartao_validade, :cartao_seguranca, :cartao_portador])
+          to_analyze.concat([:cartao_numero, :cartao_validade, :cartao_portador]) # :cartao_seguranca
         end
       end
 
