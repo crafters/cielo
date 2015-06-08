@@ -1,4 +1,5 @@
 #encoding: utf-8
+require 'bigdecimal'
 module Cielo
   class Transaction
 
@@ -85,14 +86,14 @@ module Cielo
       @connection.make_request! message
     end
 
-    def cancel!(cielo_tid, valor=nil)
+    def cancel!(cielo_tid, valor=0)
       return nil unless cielo_tid
       message = @connection.xml_builder("requisicao-cancelamento") do |xml, target|
         if target == :before
           xml.tid "#{cielo_tid}"
         end
         if target == :after
-          xml.valor "#{valor}" if valor.to_d > 0
+          xml.valor "#{valor}" if valor.to_f > 0
         end
       end
       @connection.make_request! message
