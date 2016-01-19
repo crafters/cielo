@@ -1,5 +1,4 @@
 require 'cielo'
-require 'fakeweb'
-require 'watir-webdriver'
+require 'webmock/rspec'
 
-FakeWeb.allow_net_connect = false
+WebMock.disable_net_connect!

@@ -1,7 +1,6 @@
-# encoding: utf-8
-
 require 'rubygems'
 require 'bundler'
+
 begin
   Bundler.setup(:default, :development)
 rescue Bundler::BundlerError => e
@@ -13,21 +12,7 @@ require 'rake'
 require "rspec/core/rake_task"
 RSpec::Core::RakeTask.new
 
-require 'jeweler'
 require './lib/cielo/version.rb'
-Jeweler::Tasks.new do |gem|
-  # gem is a Gem::Specification... see http://docs.rubygems.org/read/chapter/20 for more options
-  gem.name = "cielo"
-  gem.homepage = "http://github.com/crafters/cielo"
-  gem.license = "MIT"
-  gem.summary = %Q{Integração com a cielo}
-  gem.description = %Q{Integração com a cielo}
-  gem.email = "crafters@crafters.com.br"
-  gem.authors = ["Crafters Software Studio", "Felipe Rodrigues"]
-  gem.version = Cielo::Version::STRING
-  # dependencies defined in Gemfile
-end
-Jeweler::RubygemsDotOrgTasks.new
 
 require 'rake/testtask'
 Rake::TestTask.new(:test) do |test|
