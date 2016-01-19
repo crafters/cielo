@@ -1,6 +1,6 @@
 Gem::Specification.new do |s|
   s.name = 'cielo'
-  s.version = '0.2.0'
+  s.version = '1.0.0'
 
   s.require_paths = ['lib']
   s.authors = ['Crafters Software Studio', 'Felipe Rodrigues']
@@ -21,8 +21,7 @@ Gem::Specification.new do |s|
   s.add_dependency('builder', ['>= 3.2.0'])
   s.add_dependency('bundler')
   s.add_dependency('rake')
-  s.add_development_dependency('watir-webdriver')
   s.add_development_dependency('shoulda')
   s.add_development_dependency('rspec')
-  s.add_development_dependency('fakeweb')
+  s.add_development_dependency('webmock')
 end

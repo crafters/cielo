@@ -2,14 +2,14 @@ require 'spec_helper'
 
 describe Cielo::Connection do
   before do
-    FakeWeb.allow_net_connect = true
+    WebMock.allow_net_connect!
 
     @connection = Cielo::Connection.new
     @connection2 = Cielo::Connection.new '1001734898', 'e84827130b9837473681c2787007da5914d6359947015a5cdb2b8843db0fa832'
   end
 
   after do
-    FakeWeb.allow_net_connect = false
+    WebMock.disable_net_connect!
   end
 
   it 'should estabilish connection when was created' do
