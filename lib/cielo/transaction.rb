@@ -1,4 +1,3 @@
-#encoding: utf-8
 require 'bigdecimal'
 module Cielo
   class Transaction

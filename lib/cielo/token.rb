@@ -1,4 +1,3 @@
-#encoding: utf-8
 module Cielo
   class Token
     def initialize

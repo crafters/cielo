@@ -115,7 +115,7 @@ Se torna necessário somente configurar o módulo Cielo
 == Avisos
 
 * O retorno da cielo é convertido em um hash, então, atributos no xml como url-retorno ficam :"url-retorno", cuidado com esses detalhes.
-* Foi desenvolvido e testado em ruby 2.0.0, 1.9.3, 1.9.2 e 1.8.7
+* Foi desenvolvido e testado em ruby 2.2.3
 
 == Contributing to cielo
 
@@ -135,6 +135,7 @@ Se torna necessário somente configurar o módulo Cielo
 * Gabriel Paladino and Scupen [https://github.com/gabpaladino , https://github.com/scupen] (Ruby 1.8.7 support)
 * Wilbert Ribeiro [https://github.com/wilbert/cielo, https://twitter.com/wilbertribeiro ]
 * Elton Okada [https://github.com/eltonokada, https://twitter.com/eltonokada ]
+* Alex Buschle [https://github.com/alexwbuschle, https://twitter.com/alexwbuschle ]
 
 == Copyright
 

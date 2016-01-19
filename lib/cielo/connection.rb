@@ -1,5 +1,3 @@
-#encoding: utf-8
-
 module Cielo
   class Connection
     attr_reader :environment

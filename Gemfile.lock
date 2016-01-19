@@ -92,11 +92,10 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  activesupport
-  builder
+  activesupport (>= 4.2.5)
+  builder (>= 3.2.0)
   bundler
   fakeweb
-  i18n
   jeweler
   rspec
   shoulda

@@ -1,7 +1,6 @@
-# encoding: utf-8
-
 require 'rubygems'
 require 'bundler'
+
 begin
   Bundler.setup(:default, :development)
 rescue Bundler::BundlerError => e
@@ -27,6 +26,7 @@ Jeweler::Tasks.new do |gem|
   gem.version = Cielo::Version::STRING
   # dependencies defined in Gemfile
 end
+
 Jeweler::RubygemsDotOrgTasks.new
 
 require 'rake/testtask'

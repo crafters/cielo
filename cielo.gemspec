@@ -9,8 +9,9 @@ Gem::Specification.new do |s|
   s.version = "0.1.5"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
+  s.require_paths = ["lib"]
   s.authors = ["Crafters Software Studio", "Felipe Rodrigues"]
-  s.date = "2014-01-21"
+  s.date = "2016-01-19"
   s.description = "Integra\u{e7}\u{e3}o com a cielo"
   s.email = "crafters@crafters.com.br"
   s.extra_rdoc_files = [
@@ -40,17 +41,15 @@ Gem::Specification.new do |s|
   ]
   s.homepage = "http://github.com/crafters/cielo"
   s.licenses = ["MIT"]
-  s.require_paths = ["lib"]
-  s.rubygems_version = "2.1.9"
+  s.rubygems_version = "2.5.1"
   s.summary = "Integra\u{e7}\u{e3}o com a cielo"
 
   if s.respond_to? :specification_version then
     s.specification_version = 4
 
     if Gem::Version.new(Gem::VERSION) >= Gem::Version.new('1.2.0') then
-      s.add_runtime_dependency(%q<activesupport>, [">= 3.0.7"])
-      s.add_runtime_dependency(%q<i18n>, [">= 0"])
-      s.add_runtime_dependency(%q<builder>, [">= 2.0.0"])
+      s.add_runtime_dependency(%q<activesupport>, [">= 4.2.5"])
+      s.add_runtime_dependency(%q<builder>, [">= 3.2.0"])
       s.add_development_dependency(%q<watir-webdriver>, [">= 0"])
       s.add_development_dependency(%q<shoulda>, [">= 0"])
       s.add_development_dependency(%q<bundler>, [">= 0"])
@@ -58,9 +57,8 @@ Gem::Specification.new do |s|
       s.add_development_dependency(%q<rspec>, [">= 0"])
       s.add_development_dependency(%q<fakeweb>, [">= 0"])
     else
-      s.add_dependency(%q<activesupport>, [">= 3.0.7"])
-      s.add_dependency(%q<i18n>, [">= 0"])
-      s.add_dependency(%q<builder>, [">= 2.0.0"])
+      s.add_dependency(%q<activesupport>, [">= 4.2.5"])
+      s.add_dependency(%q<builder>, [">= 3.2.0"])
       s.add_dependency(%q<watir-webdriver>, [">= 0"])
       s.add_dependency(%q<shoulda>, [">= 0"])
       s.add_dependency(%q<bundler>, [">= 0"])
@@ -69,9 +67,8 @@ Gem::Specification.new do |s|
       s.add_dependency(%q<fakeweb>, [">= 0"])
     end
   else
-    s.add_dependency(%q<activesupport>, [">= 3.0.7"])
-    s.add_dependency(%q<i18n>, [">= 0"])
-    s.add_dependency(%q<builder>, [">= 2.0.0"])
+    s.add_dependency(%q<activesupport>, [">= 4.2.5"])
+    s.add_dependency(%q<builder>, [">= 3.2.0"])
     s.add_dependency(%q<watir-webdriver>, [">= 0"])
     s.add_dependency(%q<shoulda>, [">= 0"])
     s.add_dependency(%q<bundler>, [">= 0"])
