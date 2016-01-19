@@ -13,16 +13,16 @@ describe Cielo::Connection do
   end
 
   it 'should estabilish connection when was created' do
-    @connection.environment.should_not be_nil
-    @connection2.environment.should_not be_nil
+    expect(@connection.environment).to_not be_nil
+    expect(@connection2.environment).to_not be_nil
   end
 
   describe 'making a request' do
     it 'should make a request' do
       response = @connection.request! data: 'Anything'
 
-      response.body.should_not be_nil
-      response.should be_kind_of Net::HTTPSuccess
+      expect(response.body).to_not be_nil
+      expect(response).to be_kind_of(Net::HTTPSuccess)
     end
   end
 
@@ -30,8 +30,8 @@ describe Cielo::Connection do
     it 'should make a request whithout any problem' do
       response = @connection2.request! data: 'Anything'
 
-      response.body.should_not be_nil
-      response.should be_kind_of Net::HTTPSuccess
+      expect(response.body).to_not be_nil
+      expect(response).to be_kind_of(Net::HTTPSuccess)
     end
   end
 end

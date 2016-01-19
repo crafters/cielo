@@ -9,8 +9,8 @@ describe Cielo::Token do
 
   describe 'create a token for a card' do
     before do
-      Cielo.stub(:numero_afiliacao).and_return('1006993069')
-      Cielo.stub(:chave_acesso).and_return('25fbb99741c739dd84d7b06ec78c9bac718838630f30b112d033ce2e621b34f3')
+      allow(Cielo).to receive(:numero_afiliacao).and_return('1006993069')
+      allow(Cielo).to receive(:chave_acesso).and_return('25fbb99741c739dd84d7b06ec78c9bac718838630f30b112d033ce2e621b34f3')
 
       @params = card_params
     end
@@ -21,8 +21,8 @@ describe Cielo::Token do
 
       response = @token.create! @params, :store
 
-      response[:"retorno-token"][:token][:"dados-token"][:"codigo-token"].should_not be_nil
-      response[:"retorno-token"][:token][:"dados-token"][:"numero-cartao-truncado"].should_not be_nil
+      expect(response[:"retorno-token"][:token][:"dados-token"][:"codigo-token"]).to_not be_nil
+      expect(response[:"retorno-token"][:token][:"dados-token"][:"numero-cartao-truncado"]).to_not be_nil
 
       # Respose type
       # {:"retorno-token"=>{:token=>{:"dados-token"=>{:"codigo-token"=>"2ta/YqYaeyolf2NHkBWO8grPqZE44j3PvRAQxVQQGgE=", :status=>"1", :"numero-cartao-truncado"=>"401288******1881"}}}}
