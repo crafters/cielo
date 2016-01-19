@@ -1,6 +1,6 @@
 Gem::Specification.new do |s|
   s.name = 'cielo'
-  s.version = '1.0.0'
+  s.version = '1.0.1'
 
   s.require_paths = ['lib']
   s.authors = ['Crafters Software Studio', 'Felipe Rodrigues']
@@ -17,8 +17,8 @@ Gem::Specification.new do |s|
   s.rubygems_version = '2.5.1'
   s.summary = 'Integração com a cielo'
 
-  s.add_dependency('activesupport', ['>= 4.2.5'])
-  s.add_dependency('builder', ['>= 3.2.0'])
+  s.add_dependency('activesupport', ['>= 3.2.22'])
+  s.add_dependency('builder')
   s.add_dependency('bundler')
   s.add_dependency('rake')
   s.add_development_dependency('shoulda')

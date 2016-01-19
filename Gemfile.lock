@@ -1,9 +1,9 @@
 PATH
   remote: .
   specs:
-    cielo (1.0.0)
-      activesupport (>= 4.2.5)
-      builder (>= 3.2.0)
+    cielo (1.0.1)
+      activesupport (>= 3.2.22)
+      builder
       bundler
       rake
 
