@@ -115,7 +115,8 @@ Se torna necessário somente configurar o módulo Cielo
 == Avisos
 
 * O retorno da cielo é convertido em um hash, então, atributos no xml como url-retorno ficam :"url-retorno", cuidado com esses detalhes.
-* Foi desenvolvido e testado em ruby 2.2.3
+* Gem testada em versões do ruby 2.0.0, 2.1.8, 2.2.4 e 2.3
+* Para usar em versões anteriores do Ruby, use versões da gem anteriores a 2.0
 
 == Contributing to cielo
 
