@@ -1,0 +1,51 @@
+---
+http_interactions:
+- request:
+    method: post
+    uri: https://qasecommerce.cielo.com.br/servicos/ecommwsec.do
+    body:
+      encoding: US-ASCII
+      base64_string: |
+        bWVuc2FnZW09PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgi
+        Pz48cmVxdWlzaWNhby1jYXB0dXJhIGlkPSIxNDUzMjkzOTQxIiB2ZXJzYW89
+        IjEuMy4wIj48dGlkPjEwMDE3MzQ4OTgwMDAwMkZERkZBPC90aWQ+PGRhZG9z
+        LWVjPjxudW1lcm8+MTAwMTczNDg5ODwvbnVtZXJvPjxjaGF2ZT5lODQ4Mjcx
+        MzBiOTgzNzQ3MzY4MWMyNzg3MDA3ZGE1OTE0ZDYzNTk5NDcwMTVhNWNkYjJi
+        ODg0M2RiMGZhODMyPC9jaGF2ZT48L2RhZG9zLWVjPjwvcmVxdWlzaWNhby1j
+        YXB0dXJhPg==
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Wed, 20 Jan 2016 12:45:40 GMT
+      Server:
+      - Apache/2.2.22 (Unix) mod_ssl/2.2.22 OpenSSL/0.9.8x
+      Content-Length:
+      - '190'
+      Set-Cookie:
+      - JSESSIONID=gzTnWfBJFQRh0qhVGGxV5kXBBv3QqC2wGl61qQDYXr1TdWbyvF9d!1346054325;
+        path=/
+      X-Powered-By:
+      - Servlet/2.5 JSP/2.1
+      Content-Type:
+      - text/xml; charset=ISO-8859-1
+    body:
+      encoding: ASCII-8BIT
+      base64_string: |
+        PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iSVNPLTg4NTktMSI/Pgo8
+        ZXJybyB4bWxucz0iaHR0cDovL2Vjb21tZXJjZS5jYm1wLmNvbS5iciIgaWQ9
+        IjE0NTMyOTM5NDEiPjxjb2RpZ28+MDMwPC9jb2RpZ28+PG1lbnNhZ2VtPk8g
+        c3RhdHVzICdDcmlhZGEnIG7jbyBwZXJtaXRlIGNhcHR1cmEuPC9tZW5zYWdl
+        bT48L2Vycm8+Cg==
+    http_version: 
+  recorded_at: Wed, 20 Jan 2016 12:45:41 GMT
+recorded_with: VCR 3.0.1

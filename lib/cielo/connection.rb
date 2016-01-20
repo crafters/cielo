@@ -19,17 +19,13 @@ module Cielo
     end
 
     def request!(params = {})
-      str_params = ''
-      params.each do |key, value|
-        str_params += '&' unless str_params.empty?
-        str_params += "#{key}=#{value}"
-      end
+      str_params = params.map { |key, value| "#{key}=#{value}" }.join('&')
       @http.request_post(environment::WS_PATH, str_params)
     end
 
-    def xml_builder(group_name, &_block)
+    def xml_builder(group_name, &block)
       xml = Builder::XmlMarkup.new
-      xml.instruct! :xml, version: '1.0', encoding: 'ISO-8859-1'
+      xml.instruct! :xml, version: '1.0', encoding: 'UTF-8'
       xml.tag!(group_name, id: Time.now.to_i.to_s, versao: @versao) do
         yield xml, :before
         xml.tag!('dados-ec') do
