@@ -7,13 +7,13 @@ http_interactions:
       encoding: US-ASCII
       base64_string: |
         bWVuc2FnZW09PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgi
-        Pz48cmVxdWlzaWNhby10cmFuc2FjYW8gaWQ9IjE0NTMyOTM5NDEiIHZlcnNh
+        Pz48cmVxdWlzaWNhby10cmFuc2FjYW8gaWQ9IjE0NTMyOTU1MjUiIHZlcnNh
         bz0iMS4zLjAiPjxkYWRvcy1lYz48bnVtZXJvPjEwMDE3MzQ4OTg8L251bWVy
         bz48Y2hhdmU+ZTg0ODI3MTMwYjk4Mzc0NzM2ODFjMjc4NzAwN2RhNTkxNGQ2
         MzU5OTQ3MDE1YTVjZGIyYjg4NDNkYjBmYTgzMjwvY2hhdmU+PC9kYWRvcy1l
         Yz48ZGFkb3MtcGVkaWRvPjxudW1lcm8+MTwvbnVtZXJvPjx2YWxvcj4xMDAw
         PC92YWxvcj48bW9lZGE+OTg2PC9tb2VkYT48ZGF0YS1ob3JhPjIwMTYtMDEt
-        MjBUMTA6NDU6NDE8L2RhdGEtaG9yYT48aWRpb21hPlBUPC9pZGlvbWE+PHNv
+        MjBUMTE6MTI6MDU8L2RhdGEtaG9yYT48aWRpb21hPlBUPC9pZGlvbWE+PHNv
         ZnQtZGVzY3JpcHRvcj48L3NvZnQtZGVzY3JpcHRvcj48L2RhZG9zLXBlZGlk
         bz48Zm9ybWEtcGFnYW1lbnRvPjxiYW5kZWlyYT52aXNhPC9iYW5kZWlyYT48
         cHJvZHV0bz4xPC9wcm9kdXRvPjxwYXJjZWxhcz4xPC9wYXJjZWxhcz48L2Zv
@@ -34,13 +34,13 @@ http_interactions:
       message: OK
     headers:
       Date:
-      - Wed, 20 Jan 2016 12:45:41 GMT
+      - Wed, 20 Jan 2016 13:12:06 GMT
       Server:
       - Apache/2.2.22 (Unix) mod_ssl/2.2.22 OpenSSL/0.9.8x
       Content-Length:
-      - '403'
+      - '402'
       Set-Cookie:
-      - JSESSIONID=1qbmWfBJMrJH9YC0vp3KdH1KdmhTkg3lnp5KVXnJlT4fhhddBwNw!-1619892065;
+      - JSESSIONID=hLM5WfHFB6DPqbST9nNwYJ1WWXxPHfH6QsdksthRbQpPL0kq2vQK!-1619892065;
         path=/
       X-Powered-By:
       - Servlet/2.5 JSP/2.1
@@ -54,22 +54,22 @@ http_interactions:
       encoding: ASCII-8BIT
       base64_string: |
         PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iSVNPLTg4NTktMSI/Pgo8
-        dHJhbnNhY2FvIHZlcnNhbz0iMS4zLjAiIGlkPSIxNDUzMjkzOTQxIiB4bWxu
+        dHJhbnNhY2FvIHZlcnNhbz0iMS4zLjAiIGlkPSIxNDUzMjk1NTI1IiB4bWxu
         cz0iaHR0cDovL2Vjb21tZXJjZS5jYm1wLmNvbS5iciI+CiAgPHRpZD4xMDAx
-        NzM0ODk4MDAwMDJGRTAwQTwvdGlkPgogIDxkYWRvcy1wZWRpZG8+CiAgICA8
+        NzM0ODk4MDAwMDJGRTA1QTwvdGlkPgogIDxkYWRvcy1wZWRpZG8+CiAgICA8
         bnVtZXJvPjE8L251bWVybz4KICAgIDx2YWxvcj4xMDAwPC92YWxvcj4KICAg
         IDxtb2VkYT45ODY8L21vZWRhPgogICAgPGRhdGEtaG9yYT4yMDE2LTAxLTIw
-        VDEwOjQ1OjQwLjgxOS0wMjowMDwvZGF0YS1ob3JhPgogICAgPGlkaW9tYT5Q
+        VDExOjEyOjA1LjI1My0wMjowMDwvZGF0YS1ob3JhPgogICAgPGlkaW9tYT5Q
         VDwvaWRpb21hPgogICAgPHRheGEtZW1iYXJxdWU+MDwvdGF4YS1lbWJhcnF1
         ZT4KICA8L2RhZG9zLXBlZGlkbz4KICA8Zm9ybWEtcGFnYW1lbnRvPgogICAg
         PGJhbmRlaXJhPnZpc2E8L2JhbmRlaXJhPgogICAgPHByb2R1dG8+MTwvcHJv
         ZHV0bz4KICAgIDxwYXJjZWxhcz4xPC9wYXJjZWxhcz4KICA8L2Zvcm1hLXBh
         Z2FtZW50bz4KICA8c3RhdHVzPjA8L3N0YXR1cz4KICA8dXJsLWF1dGVudGlj
         YWNhbz5odHRwczovL3Fhc2Vjb21tZXJjZS5jaWVsby5jb20uYnIvd2ViL2lu
-        ZGV4LmNibXA/aWQ9MGZlYWNkODBhMGY0NzA5MDVmZGQ5ZWVlYjIxMmMwNzk8
+        ZGV4LmNibXA/aWQ9MDIxMzI3NjJhNmMyMTMxOTkzY2RjODZhMjBlMmYxMzQ8
         L3VybC1hdXRlbnRpY2FjYW8+CjwvdHJhbnNhY2FvPgo=
     http_version: 
-  recorded_at: Wed, 20 Jan 2016 12:45:41 GMT
+  recorded_at: Wed, 20 Jan 2016 13:12:06 GMT
 - request:
     method: post
     uri: https://qasecommerce.cielo.com.br/servicos/ecommwsec.do
@@ -77,8 +77,8 @@ http_interactions:
       encoding: US-ASCII
       base64_string: |
         bWVuc2FnZW09PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgi
-        Pz48cmVxdWlzaWNhby1jYW5jZWxhbWVudG8gaWQ9IjE0NTMyOTM5NDEiIHZl
-        cnNhbz0iMS4zLjAiPjx0aWQ+MTAwMTczNDg5ODAwMDAyRkUwMEE8L3RpZD48
+        Pz48cmVxdWlzaWNhby1jYW5jZWxhbWVudG8gaWQ9IjE0NTMyOTU1MjYiIHZl
+        cnNhbz0iMS4zLjAiPjx0aWQ+MTAwMTczNDg5ODAwMDAyRkUwNUE8L3RpZD48
         ZGFkb3MtZWM+PG51bWVybz4xMDAxNzM0ODk4PC9udW1lcm8+PGNoYXZlPmU4
         NDgyNzEzMGI5ODM3NDczNjgxYzI3ODcwMDdkYTU5MTRkNjM1OTk0NzAxNWE1
         Y2RiMmI4ODQzZGIwZmE4MzI8L2NoYXZlPjwvZGFkb3MtZWM+PC9yZXF1aXNp
@@ -96,13 +96,13 @@ http_interactions:
       message: OK
     headers:
       Date:
-      - Wed, 20 Jan 2016 12:45:41 GMT
+      - Wed, 20 Jan 2016 13:12:06 GMT
       Server:
       - Apache/2.2.22 (Unix) mod_ssl/2.2.22 OpenSSL/0.9.8x
       Content-Length:
       - '235'
       Set-Cookie:
-      - JSESSIONID=1NHmWfBVtgY5xrHlpyD2VxQPVhJHNpbn0YT22f8jrpm9yTS7BN46!1346054325;
+      - JSESSIONID=GhldWfHFyxP95wWpW8FZR4Cv8fbGJT3rZVpgH1FkdvLTTkMWb0PC!1346054325;
         path=/
       X-Powered-By:
       - Servlet/2.5 JSP/2.1
@@ -113,10 +113,10 @@ http_interactions:
       base64_string: |
         PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iSVNPLTg4NTktMSI/Pgo8
         ZXJybyB4bWxucz0iaHR0cDovL2Vjb21tZXJjZS5jYm1wLmNvbS5iciIgaWQ9
-        IjE0NTMyOTM5NDEiPjxjb2RpZ28+MDQyPC9jb2RpZ28+PG1lbnNhZ2VtPkNh
+        IjE0NTMyOTU1MjYiPjxjb2RpZ28+MDQyPC9jb2RpZ28+PG1lbnNhZ2VtPkNh
         bmNlbGFtZW50byBkYSB0cmFuc2Hn428gW3RpZD0nMTAwMTczNDg5ODAwMDAy
-        RkUwMEEnIG7jbyBmb2kgZWZldHVhZG8gY29tIHN1Y2Vzc28uPC9tZW5zYWdl
+        RkUwNUEnIG7jbyBmb2kgZWZldHVhZG8gY29tIHN1Y2Vzc28uPC9tZW5zYWdl
         bT48L2Vycm8+Cg==
     http_version: 
-  recorded_at: Wed, 20 Jan 2016 12:45:41 GMT
+  recorded_at: Wed, 20 Jan 2016 13:12:06 GMT
 recorded_with: VCR 3.0.1

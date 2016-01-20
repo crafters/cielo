@@ -20,13 +20,13 @@ http_interactions:
       message: OK
     headers:
       Date:
-      - Wed, 20 Jan 2016 12:45:38 GMT
+      - Wed, 20 Jan 2016 13:12:01 GMT
       Server:
       - Apache/2.2.22 (Unix) mod_ssl/2.2.22 OpenSSL/0.9.8x
       Content-Length:
       - '158'
       Set-Cookie:
-      - JSESSIONID=hhL3WfBRVcbMKCv51C32SQlQryZTJvnjpJyF87VnxcWTj22pspJw!-1619892065;
+      - JSESSIONID=FWJLWfHBLn1JbT1z2ntG6ZXsyyB9H9pJhPTJ8VsX4Ys1qXndHhGp!1346054325;
         path=/
       X-Powered-By:
       - Servlet/2.5 JSP/2.1
@@ -40,5 +40,5 @@ http_interactions:
         b2RpZ28+MDAxPC9jb2RpZ28+IDxtZW5zYWdlbT5SZXF1aXNp5+NvIGluduFs
         aWRhPC9tZW5zYWdlbT4gPC9lcnJvPgo=
     http_version: 
-  recorded_at: Wed, 20 Jan 2016 12:45:38 GMT
+  recorded_at: Wed, 20 Jan 2016 13:12:02 GMT
 recorded_with: VCR 3.0.1

@@ -5,7 +5,7 @@ module Cielo
     attr_reader :chave_acesso
     attr_reader :versao
 
-    def initialize(numero_afiliacao = Cielo.numero_afiliacao, chave_acesso = Cielo.chave_acesso, versao = '1.2.1')
+    def initialize(numero_afiliacao = Cielo.numero_afiliacao, chave_acesso = Cielo.chave_acesso, versao = '1.3.0')
       @numero_afiliacao = numero_afiliacao
       @chave_acesso = chave_acesso
       @versao = versao
