@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    cielo (1.0.1)
+    cielo (1.1.0)
       activesupport (>= 3.2.22)
       builder
       bundler
