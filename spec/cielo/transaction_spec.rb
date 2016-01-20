@@ -44,7 +44,6 @@ describe Cielo::Transaction do
       expect(response[:transacao][:token][:"dados-token"][:"codigo-token"]).to_not be_nil
     end
   
-
     it 'creates a recurring transaction with token' do
       params = default_params.merge(token: @token_code, autorizar: 4) # autorizar: 4 - recurring transaction
 
@@ -63,7 +62,7 @@ describe Cielo::Transaction do
       end
     end
 
-    it 'delivers a successful message amd catch' do
+    it 'delivers a successful message and catch' do
       params = default_params.merge(authentication_credit_card_params).merge(autorizar: 2, capturar: 'false')
       response = VCR.use_cassette('buy_page_create_authorization_transaction', preserve_exact_body_bytes: true) do
         @transaction.create! params, :store
@@ -74,6 +73,17 @@ describe Cielo::Transaction do
       response = VCR.use_cassette('buy_page_requisicao_captura', preserve_exact_body_bytes: true) do
         @transaction.catch!(response[:transacao][:tid])
       end
+    end
+
+    it 'verify transaction by number' do
+      params = default_params.merge(credit_card_params).merge(autorizar: 3)
+
+      response = VCR.use_cassette('buy_page_verify_by_number', preserve_exact_body_bytes: true) do
+        create_response = @transaction.create! params, :store
+        @transaction.verify_by_number!('1')
+      end
+
+      expect(response[:transacao][:tid]).to_not be_nil
     end
   end
 

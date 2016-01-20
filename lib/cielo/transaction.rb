@@ -60,6 +60,15 @@ module Cielo
       @connection.make_request! message
     end
 
+    def verify_by_number!(order_number)
+      return nil unless order_number
+      message = @connection.xml_builder('requisicao-consulta-chsec') do |xml, target|
+        xml.tag! 'numero-pedido', order_number if target == :before
+      end
+
+      @connection.make_request! message
+    end
+
     def catch!(cielo_tid)
       return nil unless cielo_tid
       message = @connection.xml_builder('requisicao-captura') do |xml, target|
