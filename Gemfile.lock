@@ -1,9 +1,9 @@
 PATH
   remote: .
   specs:
-    cielo (1.0.0)
-      activesupport (>= 4.2.5)
-      builder (>= 3.2.0)
+    cielo (1.1.0)
+      activesupport (>= 3.2.22)
+      builder
       bundler
       rake
 
@@ -49,6 +49,7 @@ GEM
     thread_safe (0.3.5)
     tzinfo (1.2.2)
       thread_safe (~> 0.1)
+    vcr (3.0.1)
     webmock (1.22.6)
       addressable (>= 2.3.6)
       crack (>= 0.3.2)
@@ -61,6 +62,7 @@ DEPENDENCIES
   cielo!
   rspec
   shoulda
+  vcr
   webmock
 
 BUNDLED WITH

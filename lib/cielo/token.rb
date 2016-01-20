@@ -1,7 +1,9 @@
 module Cielo
   class Token
-    def initialize
-      @connection = Cielo::Connection.new
+    attr_accessor :response
+
+    def initialize(connection = Cielo::Connection.new)
+      @connection = connection
     end
 
     def create!(parameters = {}, _buy_page = :cielo)
@@ -15,7 +17,7 @@ module Cielo
         end
       end
 
-      @connection.make_request! message
+      self.response = @connection.make_request!(message)
     end
   end
 end

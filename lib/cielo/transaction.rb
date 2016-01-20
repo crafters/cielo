@@ -5,7 +5,7 @@ module Cielo
     attr_reader :chave_acesso
     attr_reader :versao
 
-    def initialize(numero_afiliacao = Cielo.numero_afiliacao, chave_acesso = Cielo.chave_acesso, versao = '1.2.1')
+    def initialize(numero_afiliacao = Cielo.numero_afiliacao, chave_acesso = Cielo.chave_acesso, versao = '1.3.0')
       @numero_afiliacao = numero_afiliacao
       @chave_acesso = chave_acesso
       @versao = versao
@@ -55,6 +55,15 @@ module Cielo
       return nil unless cielo_tid
       message = @connection.xml_builder('requisicao-consulta') do |xml, target|
         xml.tid cielo_tid.to_s if target == :before
+      end
+
+      @connection.make_request! message
+    end
+
+    def verify_by_number!(order_number)
+      return nil unless order_number
+      message = @connection.xml_builder('requisicao-consulta-chsec') do |xml, target|
+        xml.tag! 'numero-pedido', order_number if target == :before
       end
 
       @connection.make_request! message

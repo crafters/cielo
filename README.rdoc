@@ -28,7 +28,7 @@ Integração com a Cielo via WebServices [Buy Page Cielo / Buy Page Loja ]
     valor: "123123",
     moeda: "986",
     bandeira: 'visa',
-    :'url-retorno' => 'http://url.retorno',
+    'url-retorno' => 'http://url.retorno',
     cartao_numero: '4012001037141112',
     cartao_validade: '201805',
     cartao_seguranca: '123',
@@ -48,9 +48,9 @@ Integração com a Cielo via WebServices [Buy Page Cielo / Buy Page Loja ]
   token_request = Cielo::Token.new
 
   token_parameters = {
-    :cartao_numero => '4012888888881881',  
-    :cartao_validade => '201508', 
-    :cartao_portador => 'Nome portador' }
+    cartao_numero: '4012888888881881',  
+    cartao_validade: '201508', 
+    cartao_portador: 'Nome portador' }
   }
 
   response = token_request.create! token_parameters, :store
@@ -73,7 +73,7 @@ Integração com a Cielo via WebServices [Buy Page Cielo / Buy Page Loja ]
 
 Caso seja necessário fazer uma transação recorrente, basta alterar a tag autorizar para 4.
 
-Uma transação com um o campo "gerar-token" => true, gera um token correspondente que pode ser armazenado para transações futuras.
+Uma transação com um o campo gerar-token": true, gera um token correspondente que pode ser armazenado para transações futuras.
 
 == Buy Page Cielo
 
@@ -84,7 +84,7 @@ Uma transação com um o campo "gerar-token" => true, gera um token corresponden
     valor: "123123",
     moeda: "986",
     bandeira: 'visa',
-    :'url-retorno' => 'http://url.retorno',
+    'url-retorno' => 'http://url.retorno',
   }
 
   transaction.create!(transaction_parameters, :cielo) #inicia uma nova transação / :cielo é padrão
@@ -116,7 +116,7 @@ Se torna necessário somente configurar o módulo Cielo
 
 * O retorno da cielo é convertido em um hash, então, atributos no xml como url-retorno ficam :"url-retorno", cuidado com esses detalhes.
 * Gem testada em versões do ruby 2.0.0, 2.1.8, 2.2.4 e 2.3
-* Para usar em versões anteriores do Ruby, use versões da gem anteriores a 2.0
+* Para usar em versões anteriores do Ruby, use versões da gem anteriores a 1.0
 
 == Contributing to cielo
 

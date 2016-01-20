@@ -1,0 +1,44 @@
+---
+http_interactions:
+- request:
+    method: post
+    uri: https://qasecommerce.cielo.com.br/servicos/ecommwsec.do
+    body:
+      encoding: US-ASCII
+      base64_string: |
+        ZGF0YT1Bbnl0aGluZw==
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Wed, 20 Jan 2016 13:12:01 GMT
+      Server:
+      - Apache/2.2.22 (Unix) mod_ssl/2.2.22 OpenSSL/0.9.8x
+      Content-Length:
+      - '158'
+      Set-Cookie:
+      - JSESSIONID=s6nqWfHQ1Gxj92yjQWfzmpDGyfbnGL2VKNzgXJlQG12bgZTzvQ8V!-1619892065;
+        path=/
+      X-Powered-By:
+      - Servlet/2.5 JSP/2.1
+      Content-Type:
+      - text/xml; charset=ISO-8859-1
+    body:
+      encoding: ASCII-8BIT
+      base64_string: |
+        PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iSVNPLTg4NTktMSI/PiA8
+        ZXJybyB4bWxucz0iaHR0cDovL2Vjb21tZXJjZS5jYm1wLmNvbS5iciI+IDxj
+        b2RpZ28+MDAxPC9jb2RpZ28+IDxtZW5zYWdlbT5SZXF1aXNp5+NvIGluduFs
+        aWRhPC9tZW5zYWdlbT4gPC9lcnJvPgo=
+    http_version: 
+  recorded_at: Wed, 20 Jan 2016 13:12:01 GMT
+recorded_with: VCR 3.0.1

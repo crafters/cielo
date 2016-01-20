@@ -1,0 +1,62 @@
+---
+http_interactions:
+- request:
+    method: post
+    uri: https://qasecommerce.cielo.com.br/servicos/ecommwsec.do
+    body:
+      encoding: US-ASCII
+      base64_string: |
+        bWVuc2FnZW09PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgi
+        Pz48cmVxdWlzaWNhby1jb25zdWx0YSBpZD0iMTQ1MzI5NTUyNSIgdmVyc2Fv
+        PSIxLjMuMCI+PHRpZD4xMDAxNzM0ODk4MDAwMDJGREY3QTwvdGlkPjxkYWRv
+        cy1lYz48bnVtZXJvPjEwMDE3MzQ4OTg8L251bWVybz48Y2hhdmU+ZTg0ODI3
+        MTMwYjk4Mzc0NzM2ODFjMjc4NzAwN2RhNTkxNGQ2MzU5OTQ3MDE1YTVjZGIy
+        Yjg4NDNkYjBmYTgzMjwvY2hhdmU+PC9kYWRvcy1lYz48L3JlcXVpc2ljYW8t
+        Y29uc3VsdGE+
+    headers:
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Wed, 20 Jan 2016 13:12:05 GMT
+      Server:
+      - Apache/2.2.22 (Unix) mod_ssl/2.2.22 OpenSSL/0.9.8x
+      Content-Length:
+      - '336'
+      Set-Cookie:
+      - JSESSIONID=xgwGWfHGHpwph7Hj7CFHjHZGQKc97NYBy9Wc3n2xnrQm9hZ8qGpn!-1619892065;
+        path=/
+      X-Powered-By:
+      - Servlet/2.5 JSP/2.1
+      Content-Type:
+      - text/xml; charset=ISO-8859-1
+      Vary:
+      - Accept-Encoding, User-Agent
+      Connection:
+      - Keep-Alive
+    body:
+      encoding: ASCII-8BIT
+      base64_string: |
+        PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iSVNPLTg4NTktMSI/Pgo8
+        dHJhbnNhY2FvIHZlcnNhbz0iMS4zLjAiIGlkPSIxNDUzMjk1NTI1IiB4bWxu
+        cz0iaHR0cDovL2Vjb21tZXJjZS5jYm1wLmNvbS5iciI+CiAgPHRpZD4xMDAx
+        NzM0ODk4MDAwMDJGREY3QTwvdGlkPgogIDxkYWRvcy1wZWRpZG8+CiAgICA8
+        bnVtZXJvPjE8L251bWVybz4KICAgIDx2YWxvcj4xMDAwPC92YWxvcj4KICAg
+        IDxtb2VkYT45ODY8L21vZWRhPgogICAgPGRhdGEtaG9yYT4yMDE2LTAxLTIw
+        VDEwOjE1OjQwLjE4MS0wMjowMDwvZGF0YS1ob3JhPgogICAgPGlkaW9tYT5Q
+        VDwvaWRpb21hPgogICAgPHRheGEtZW1iYXJxdWU+MDwvdGF4YS1lbWJhcnF1
+        ZT4KICA8L2RhZG9zLXBlZGlkbz4KICA8Zm9ybWEtcGFnYW1lbnRvPgogICAg
+        PGJhbmRlaXJhPnZpc2E8L2JhbmRlaXJhPgogICAgPHByb2R1dG8+MTwvcHJv
+        ZHV0bz4KICAgIDxwYXJjZWxhcz4xPC9wYXJjZWxhcz4KICA8L2Zvcm1hLXBh
+        Z2FtZW50bz4KICA8c3RhdHVzPjA8L3N0YXR1cz4KPC90cmFuc2FjYW8+Cg==
+    http_version: 
+  recorded_at: Wed, 20 Jan 2016 13:12:05 GMT
+recorded_with: VCR 3.0.1
