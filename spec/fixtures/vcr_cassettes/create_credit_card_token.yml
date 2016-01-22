@@ -4,10 +4,10 @@ http_interactions:
     method: post
     uri: https://qasecommerce.cielo.com.br/servicos/ecommwsec.do
     body:
-      encoding: US-ASCII
+      encoding: UTF-8
       base64_string: |
         bWVuc2FnZW09PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgi
-        Pz48cmVxdWlzaWNhby10b2tlbiBpZD0iMTQ1MzI5NTUyMiIgdmVyc2FvPSIx
+        Pz48cmVxdWlzaWNhby10b2tlbiBpZD0iMTQ1MzQ4Mjk0NCIgdmVyc2FvPSIx
         LjIuMSI+PGRhZG9zLWVjPjxudW1lcm8+MTAwNjk5MzA2OTwvbnVtZXJvPjxj
         aGF2ZT4yNWZiYjk5NzQxYzczOWRkODRkN2IwNmVjNzhjOWJhYzcxODgzODYz
         MGYzMGIxMTJkMDMzY2UyZTYyMWIzNGYzPC9jaGF2ZT48L2RhZG9zLWVjPjxk
@@ -28,13 +28,13 @@ http_interactions:
       message: OK
     headers:
       Date:
-      - Wed, 20 Jan 2016 13:12:02 GMT
+      - Fri, 22 Jan 2016 17:15:44 GMT
       Server:
       - Apache/2.2.22 (Unix) mod_ssl/2.2.22 OpenSSL/0.9.8x
       Content-Length:
       - '380'
       Set-Cookie:
-      - JSESSIONID=PkTSWfHBjHhLlhS5tg2x4wbD0GSXkhr1nk63QLTcwn5pnHCT12LG!-1619892065;
+      - JSESSIONID=qTBVWvjQbH1nRjLL0PLCSW2MLRNN1vsMQJ5QZTp1vSPsyT6JjdPj!-1619892065;
         path=/
       X-Powered-By:
       - Servlet/2.5 JSP/2.1
@@ -44,7 +44,7 @@ http_interactions:
       encoding: UTF-8
       base64_string: |
         PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iSVNPLTg4NTktMSI/Pgo8
-        cmV0b3Juby10b2tlbiB2ZXJzYW89IjEuMi4xIiBpZD0iMTQ1MzI5NTUyMiIg
+        cmV0b3Juby10b2tlbiB2ZXJzYW89IjEuMi4xIiBpZD0iMTQ1MzQ4Mjk0NCIg
         eG1sbnM9Imh0dHA6Ly9lY29tbWVyY2UuY2JtcC5jb20uYnIiPgogIDx0b2tl
         bj4KICAgIDxkYWRvcy10b2tlbj4KICAgICAgPGNvZGlnby10b2tlbj5sMzR0
         RUtMejVpbmJ1Z0hHa3BaeDZJMWtCWlc4cW95c21meGl5Tjh6aE84PTwvY29k
@@ -53,5 +53,5 @@ http_interactions:
         LWNhcnRhby10cnVuY2Fkbz4KICAgIDwvZGFkb3MtdG9rZW4+CiAgPC90b2tl
         bj4KPC9yZXRvcm5vLXRva2VuPgo=
     http_version: 
-  recorded_at: Wed, 20 Jan 2016 13:12:02 GMT
+  recorded_at: Fri, 22 Jan 2016 17:15:44 GMT
 recorded_with: VCR 3.0.1
