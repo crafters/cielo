@@ -11,7 +11,7 @@ describe Cielo::Transaction do
       allow(Cielo).to receive(:chave_acesso).and_return('25fbb99741c739dd84d7b06ec78c9bac718838630f30b112d033ce2e621b34f3')
 
       token = Cielo::Token.new
-      VCR.use_cassette('create_candidate_card_token', preserve_exact_body_bytes: true) do
+      VCR.use_cassette('create_credit_card_token', preserve_exact_body_bytes: true) do
         token.create! credit_card_params, :store
       end
 
