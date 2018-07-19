@@ -12,7 +12,7 @@ module Cielo
       @versao = versao
       port = 443
       @http = Net::HTTP.new(@environment::BASE_URL, port)
-      @http.ssl_version = :TLSv1 if @http.respond_to? :ssl_version
+      @http.ssl_version = :TLSv1_2
       @http.use_ssl = true
       @http.open_timeout = 10 * 1000
       @http.read_timeout = 40 * 1000
